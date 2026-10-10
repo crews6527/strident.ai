@@ -1,6 +1,6 @@
 # Strident.AI
 
-Strident is a Windows desktop assistant for Prompt Copy Studio. It uses Python 3.12, PyQt6 and a locally installed Ollama model. Version 3.1.2 retains the repaired application and removes old release files, duplicate uploads and bundled development environments.
+Strident is a Windows desktop assistant for Prompt Copy Studio. It uses Python 3.12, PyQt6 and a locally installed Ollama model. Version 3.1.3 fixes direct website commands such as `open promptcopystudio.42web.io` and `read promptcopystudio.42web.io`, and accepts polite forms of basic commands. These actions bypass model inference. Browser handoff is reported separately from verified page rendering. The cleaned source excludes old release files, duplicate uploads and bundled development environments.
 
 ## Install and launch
 

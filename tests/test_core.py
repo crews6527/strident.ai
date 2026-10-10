@@ -39,17 +39,37 @@ class ConfigTests(unittest.TestCase):
 
 class RoutingTests(unittest.TestCase):
     def test_app_phrasings(self):
-        for text in ("Open Notepad", "Run Notepad", "Launch Notepad", "Start Notepad"):
+        for text in ("Open Notepad", "Run Notepad", "Launch Notepad", "Start Notepad",
+                     "Please open Notepad", "Could you please open Notepad?", "Open Notepad, please"):
             self.assertEqual(direct_command(text), ("open_app", {"app": "Notepad"}))
 
     def test_web_capability_command(self):
         self.assertEqual(direct_command("Can you access the web?"), ("check_web", {}))
+        self.assertEqual(direct_command("Can you check my internet connection please?"), ("check_web", {}))
 
     def test_multi_task_not_truncated(self):
         self.assertIsNone(direct_command("Open Notepad and search the web"))
+        self.assertIsNone(direct_command("Please open Notepad and search the web"))
 
     def test_open_url(self):
         self.assertEqual(direct_command("Open https://example.com"), ("open_url", {"url": "https://example.com"}))
+
+    def test_bare_domain_open_and_read(self):
+        for verb in ("open", "launch", "run", "start"):
+            self.assertEqual(direct_command(verb+" promptcopystudio.42web.io"),
+                             ("open_url", {"url": "https://promptcopystudio.42web.io"}))
+        self.assertEqual(direct_command("read promptcopystudio.42web.io"),
+                         ("read_web", {"url": "https://promptcopystudio.42web.io"}))
+        self.assertEqual(direct_command("open example.com:8443/path?q=test#section"),
+                         ("open_url", {"url": "https://example.com:8443/path?q=test#section"}))
+        self.assertEqual(direct_command("Could you please open promptcopystudio.42web.io?"),
+                         ("open_url", {"url": "https://promptcopystudio.42web.io"}))
+
+    def test_domain_routing_preserves_executables_and_multiple_tasks(self):
+        self.assertEqual(direct_command("open notepad.exe"), ("open_app", {"app": "notepad.exe"}))
+        self.assertIsNone(direct_command("open example.com and open Notepad"))
+        self.assertIsNone(direct_command("read example.com and summarize its products"))
+        self.assertEqual(direct_command("open sales report"), ("open_app", {"app": "sales report"}))
 
     def test_search_query(self):
         self.assertEqual(direct_command("Search the web for weather Chicago"), ("search_web", {"query": "weather Chicago"}))
@@ -142,6 +162,21 @@ class ToolTests(unittest.TestCase):
 
 
 class RuntimeTests(unittest.TestCase):
+    def test_open_bare_domain_handoff_without_model_or_app_lookup(self):
+        with patch("pcs_agent.runtime.Ollama") as model, patch("pcs_agent.tools.webbrowser.open", return_value=True) as browser, patch("pcs_agent.tools.ToolRunner.open_app") as app:
+            result = execute("open promptcopystudio.42web.io", validate({}), "", [], lambda x: None)
+        model.assert_not_called()
+        app.assert_not_called()
+        browser.assert_called_once_with("https://promptcopystudio.42web.io", new=2)
+        self.assertEqual(result["status"], "complete")
+        self.assertEqual(result["evidence"][0]["url"], "https://promptcopystudio.42web.io")
+
+    def test_bare_domain_browser_failure_is_visible_without_model(self):
+        with patch("pcs_agent.runtime.Ollama") as model, patch("pcs_agent.tools.webbrowser.open", return_value=False):
+            result = execute("open promptcopystudio.42web.io", validate({}), "", [], lambda x: None)
+        model.assert_not_called()
+        self.assertEqual(result["status"], "needs_attention")
+
     def test_direct_command_does_not_contact_model(self):
         with patch("pcs_agent.runtime.Ollama") as client:
             result = execute("Help", validate({}), "", [], lambda x: None)

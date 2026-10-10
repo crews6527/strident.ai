@@ -1,6 +1,10 @@
 # Optional CurbSentry monitor
 
-This release extends the supplied independent Strident RC2 desktop package with a read-only CurbSentry page. It does not import CurbSentry or the legacy MARK plugin. Its existing store, memory and task flows remain in the package.
+Strident includes a read-only CurbSentry page and keeps its existing store, memory
+and task flows. Use the desktop service under `desktop/` in
+https://github.com/crews6527/curbsentry.app (build 2026.10.10.1 or later). The separate
+browser-only CurbSentry site does not supply this local bridge. The adapter does
+not import CurbSentry or the legacy MARK plugin.
 
 Run Install-Strident.cmd in this new folder, then Launch-Strident.cmd. Start the separate CurbSentry service first. Open CurbSentry in Strident's sidebar, choose Connect and select `%LOCALAPPDATA%\CurbSentryPrivate\strident-bridge.json`. Choose Start monitoring. Monitoring starts off every launch and stops when the window closes.
 
