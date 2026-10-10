@@ -1,0 +1,7 @@
+# Tested together on CPython 3.12. Keep the complete set together.
+PyQt6==6.10.2
+PyQt6-Qt6==6.10.2
+PyQt6-sip==13.12.0
+psutil==7.2.2
+pypdf==6.10.0
+pyaes==1.6.1

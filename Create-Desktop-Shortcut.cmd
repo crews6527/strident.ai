@@ -1,0 +1,4 @@
+@echo off
+powershell.exe -NoProfile -STA -ExecutionPolicy Bypass -File "%~dp0Create-Desktop-Shortcut.ps1"
+if errorlevel 1 echo Shortcut creation stopped. Review the message above.
+pause

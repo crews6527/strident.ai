@@ -1,0 +1,28 @@
+# Local Python environments and generated caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local configuration, credentials and personal app data
+.env
+.env.*
+config.json
+strident-bridge.json
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+store_drafts/
+website_reports/
+updates/
+backups/
+
+# Downloaded archives, executables and generated diagnostics
+*.zip
+*.exe
+*.log
+Strident_Idle_Result.json
+Strident_File_Inventory_*.json
+Strident_File_Inventory_*.md
