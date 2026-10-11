@@ -1,6 +1,14 @@
 # Cleaned-source verification
 
-Version: 3.2.0. Checked October 11, 2026 (UTC and America/Chicago).
+Version: 3.2.1. Checked October 11, 2026 (UTC and America/Chicago).
+
+## Dependency patch release checks
+
+- Updated pypdf to 6.20.0 after pip-audit reported 49 vulnerability entries for 6.10.0. The patched six-package requirements audit reports zero known vulnerabilities. Other native binaries, OS components and model weights are outside this audit.
+- All 152 application tests passed in 29.589 seconds on CPython 3.12.14 with Qt offscreen, including actual PDF import/audit workflows and spawned workers.
+- The separate 30.005-second idle check passed: 0.044587 console CPU seconds, 0.149% of one core, 0.017% of nine logical cores, zero tasks and zero model requests. It isolates test data and measures this Linux console process only.
+- The exact pypdf 6.20.0 distribution license replaces the older version’s license file, and the source checksums were regenerated.
+- Existing Windows installations need the installer rerun to apply the dependency patch. Windows, Docker and actual Ollama behavior remain unverified here. The 45-second model timeout was not changed.
 
 ## Coding release checks
 

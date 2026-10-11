@@ -8,7 +8,7 @@ The installer obtains unmodified official packages through pip. Their binaries a
 | PyQt6-Qt6 | 6.10.2 | GNU LGPL version 3 in the wheel license; Qt components and third-party modules have their own applicable terms |
 | PyQt6-sip | 13.12.0 | BSD 2-Clause |
 | psutil | 7.2.2 | BSD 3-Clause |
-| pypdf | 6.10.0 | BSD 3-Clause |
+| pypdf | 6.20.0 | BSD 3-Clause |
 | pyaes | 1.6.1 | MIT; fixed AES-CBC cookie arithmetic for the configured website |
 
 Python is supplied by your installation and has its own Python Software Foundation license. SQLite and HTTP/JSON functionality are accessed through Python's standard library. No Gumroad SDK or Gumroad server source is copied into this package. The native HTTP client follows API request/response contracts; account permissions, provider terms and available endpoints still apply.
@@ -27,7 +27,7 @@ Primary references:
 - https://pypi.org/project/PyQt6-Qt6/6.10.2/
 - https://pypi.org/project/PyQt6-sip/13.12.0/
 - https://pypi.org/project/psutil/7.2.2/
-- https://pypi.org/project/pypdf/6.10.0/
+- https://pypi.org/project/pypdf/6.20.0/
 - https://gumroad.com/api
 - https://docs.ollama.com/api/chat
 - https://github.com/ricmoo/pyaes
