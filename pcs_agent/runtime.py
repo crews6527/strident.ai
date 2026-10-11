@@ -42,6 +42,10 @@ def model_result(result, limit):
 
 
 def _execute(command, config, attachment, history, emit, metrics):
+    from .coding import command_parts, coding_task
+    coding = command_parts(command)
+    if coding:
+        return coding_task(*coding, config, emit, metrics)
     runner = ToolRunner(config, attachment)
     listing = re.fullmatch(r"draft listing (?:for |product )?([A-Za-z0-9_-]{1,80})[.!?]?", command.strip(), re.I)
     website_review = re.fullmatch(r"(?:review|audit|check) my (?:website|site) and (?:suggest|recommend) improvements[.!?]?", command.strip(), re.I)
@@ -333,7 +337,11 @@ class Controller:
             self._event(task, {"kind": "started"})
             context = mp.get_context("spawn")
             receiver, sender = context.Pipe(duplex=False)
-            process = context.Process(target=self.worker, args=(sender, task.command, task.config, task.attachment, list(self.history)), daemon=True)
+            coding = bool(re.match(r'^/(?:code|testcode)\b', task.command.strip(), re.I))
+            worker_config = dict(task.config)
+            if coding:
+                worker_config['_coding_container'] = 'strident-code-' + task.id
+            process = context.Process(target=self.worker, args=(sender, task.command, worker_config, task.attachment, list(self.history)), daemon=True)
             started = time.monotonic()
             terminal = False
             last_wait_notice = started
@@ -348,7 +356,7 @@ class Controller:
                             "text": f"Task is still running ({now - started:.0f}s elapsed). Last stage: {task.last_stage or 'starting worker'}."})
                         last_wait_notice = now
                     if task.cancel.is_set() or self.closed.is_set():
-                        self._event(task, {"kind": "result", "status": "cancelled", "summary": "Worker stopped and its connection closed. Already launched apps remain open.", "reply": "", "evidence": []})
+                        self._event(task, {"kind": "result", "status": "cancelled", "summary": "Coding task cancelled; worker and sandbox cleanup follow. Saved revisions and observed evidence remain." if coding else "Worker stopped and its connection closed. Already launched apps remain open.", "reply": "", "evidence": []})
                         terminal = True
                         break
                     if time.monotonic() - started > task.config["task_timeout"]:
@@ -373,6 +381,13 @@ class Controller:
             except Exception as exc:
                 self._event(task, {"kind": "result", "status": "failed", "summary": str(exc), "reply": "", "evidence": []})
             finally:
+                owned_children = []
+                if coding and process.pid:
+                    import psutil
+                    try:
+                        owned_children = psutil.Process(process.pid).children(recursive=True)
+                    except psutil.Error:
+                        pass
                 if process.pid:
                     process.join(timeout=0.1)
                     if process.is_alive():
@@ -381,6 +396,21 @@ class Controller:
                     if process.is_alive():
                         process.kill()
                         process.join(timeout=0.5)
+                for child in owned_children:
+                    try:
+                        child.kill()
+                    except psutil.Error:
+                        pass
                 receiver.close()
                 sender.close()
+                if coding:
+                    try:
+                        from .coding import cleanup_container
+                        cleanup_container(worker_config['_coding_container'])
+                        self._callback({'id': task.id, 'kind': 'log', 'stage': True,
+                                        'text': 'Sandbox cleanup completed.'})
+                    except Exception as exc:
+                        self._event(task, {'kind': 'result', 'status': 'needs_attention',
+                                           'summary': 'Coding task ended; sandbox cleanup check failed: ' + str(exc),
+                                           'reply': '', 'evidence': []})
                 self.active = None

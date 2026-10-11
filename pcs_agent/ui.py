@@ -18,6 +18,7 @@ from .tools import TOOLS, format_search_results, format_tool_result
 from .storage import State
 from .store_ui import StorePage, MemoryPage
 from .curbsentry_ui import CurbSentryPage
+from .coding_ui import CodingPage
 from . import __version__
 
 
@@ -289,7 +290,7 @@ class ConsoleWindow(QMainWindow):
         sidebar.setMaximumWidth(240)
         side.addWidget(label("WORKSPACE", "eyebrow"))
         self.nav = {}
-        for title in ("Console", "Website", "Store", "Memory", "CurbSentry", "Task queue", "Files", "Tools", "Settings"):
+        for title in ("Console", "Website", "Store", "Memory", "CurbSentry", "Coding", "Task queue", "Files", "Tools", "Settings"):
             button = QPushButton(title)
             button.setObjectName("nav")
             button.setCheckable(True)
@@ -352,6 +353,7 @@ class ConsoleWindow(QMainWindow):
         listing = QPlainTextEdit()
         listing.setReadOnly(True)
         listing.setPlainText("\n\n".join(f"{n}\n{d}" for n, d, _ in TOOLS) +
+                "\n\nCoding: use the Coding page or /code project-name describe the Python task. Tests execute only in Docker. Use sandbox status to check setup and /testcode project-name to retest saved code. The selected local model generates code; no model runs while idle." +
                 "\n\nMigration pending: Ring cameras, signed-in browser automation, legacy PDF/Office processing and speech playback. These are not advertised to the model as available.")
         tools_layout.addWidget(listing)
         self.pages.addWidget(tool_page)
@@ -379,6 +381,8 @@ class ConsoleWindow(QMainWindow):
         site.addWidget(label("Public page checks work without Ollama. Suggestions use the writing model. Hosting edits need a hosting connection; this release exports reports and product listings for review.", "muted", True))
         site.addStretch()
         self.pages.addWidget(website_page)
+        self.coding_page = CodingPage(self)
+        self.pages.addWidget(self.coding_page)
         result_panel, result_layout = panel()
         result_layout.addWidget(label("LATEST RESULT", "eyebrow"))
         self.latest = label("No completed tasks yet.", "muted", True)
@@ -474,7 +478,7 @@ class ConsoleWindow(QMainWindow):
             return
         for name, button in self.nav.items():
             button.setChecked(name == title)
-        self.pages.setCurrentIndex({"Console": 0, "Task queue": 0, "Files": 1, "Tools": 2, "Store": 3, "Memory": 4, "CurbSentry": 5, "Website": 6}[title])
+        self.pages.setCurrentIndex({"Console": 0, "Task queue": 0, "Files": 1, "Tools": 2, "Store": 3, "Memory": 4, "CurbSentry": 5, "Website": 6, "Coding": 7}[title])
         if title == "CurbSentry": self.nav["CurbSentry"].setText("CurbSentry")
         if title == "Task queue":
             self.queue_list.setFocus()
@@ -492,14 +496,14 @@ class ConsoleWindow(QMainWindow):
             self.command.clear()
             self.submit(text)
 
-    def submit(self, text):
+    def submit(self, text, *, config=None):
         if self.preview:
             return
         if len(text) > 12000:
             QMessageBox.warning(self, "Command too long", "Use a command under 12,000 characters or attach a text file.")
             return
         try:
-            self.controller.submit(text, self.config, self.attachment)
+            self.controller.submit(text, config or self.config, self.attachment)
             self.navigate("Console")
             self.tabs.setCurrentIndex(0)
         except Exception as exc:

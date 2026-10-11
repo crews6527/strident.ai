@@ -201,6 +201,8 @@ def format_tool_result(result: dict) -> str:
             lines.append(str(result[key]))
     if result.get("text"):
         lines.extend(["", str(result["text"])])
+    if result.get("output"):
+        lines.extend(["", str(result["output"])])
     for key in ("products", "entries", "facts", "posts", "files", "audit"):
         if result.get(key):
             lines.extend(["", json.dumps(result[key], indent=2, ensure_ascii=False)])
@@ -303,7 +305,7 @@ class ToolRunner:
     def run(self, name: str, arguments: dict) -> dict:
         specs = {n: a for n, _, a in TOOLS}
         if name == "help":
-            return {"ok": True, "summary": "Ready for tasks. Try: Check my website; Check my website for broken links; Read my website; Open my website; Save website report; List files; Show my products; Audit product <id>; Export listing <id>; Sync Gumroad; Show memory; Open Notepad; Search the web for <topic>. These commands work without model inference. Writing and complex requests use your selected local model. Live hosting edits require a hosting connection, which this app does not yet have.", "tools": [n for n, _, _ in TOOLS]}
+            return {"ok": True, "summary": "Ready for tasks. Try: Check my website; Check my website for broken links; Read my website; Open my website; Save website report; List files; Show my products; Audit product <id>; Export listing <id>; Sync Gumroad; Show memory; Open Notepad; Search the web for <topic>. These commands work without model inference. Writing and complex requests use your selected local model. Coding page: write Python projects and test/debug them in Docker. Console: sandbox status; /code project-name describe the task; /testcode project-name. Coding requires a working Linux Docker engine and python:3.12-slim image. Live hosting edits require a hosting connection, which this app does not yet have.", "tools": [n for n, _, _ in TOOLS]}
         if name not in specs or not isinstance(arguments, dict):
             raise ValueError("Unknown tool or invalid arguments.")
         if set(arguments) != set(specs[name]) or any(not isinstance(v, str) for v in arguments.values()):

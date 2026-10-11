@@ -1,6 +1,16 @@
 # Cleaned-source verification
 
-Version: 3.1.3. Checked October 10, 2026 (UTC and America/Chicago).
+Version: 3.2.0. Checked October 11, 2026 (UTC and America/Chicago).
+
+## Coding release checks
+
+- The application suite passed 152 tests, including 17 new coding checks. These cover source/path limits, symlinks, immutable revisions, exact model selection, malformed/truncated replies, bounded repairs, saved failure evidence, retesting without inference, empty/skipped suites, fail-closed setup, Docker restriction arguments and cleanup failures. The supervisor also ran fixed trusted fixtures to verify passing/failing tests, a 12 KB output bound and deadline handling; these host fixture runs do not establish container isolation.
+- Cancellation was exercised with a real spawned worker and its subprocess. The owned subprocess was stopped, the known container name was passed to cleanup, and observed evidence survived cancellation. Docker cleanup calls were simulated.
+- A 10.005-second idle sample passed with zero submitted tasks, zero Ollama requests and 0.026490 console CPU seconds (0.265% of one core; 0.029% of nine logical cores). This measures the Linux Qt console process, not the user's Windows PC.
+- Docker and real Ollama inference are unavailable here. Container startup, actual isolation, Windows Docker Desktop behavior and real model coding quality remain unverified. Check the engine/image and run a small coding project on the target computer before daily use. No generated code was executed on the host as a fallback.
+- The archive excludes generated coding projects and their logs; these remain in the user's workspace and need their own backup.
+
+## Previous direct-command release checks
 
 - The complete application suite passed: 135 tests in 24.382 seconds on CPython 3.12.14 with Qt's offscreen platform on Linux. Four added routing/runtime tests exercise bare-domain open/read, executable and multi-action handling, browser handoff without app lookup or inference, and visible browser failure. Basic command checks also cover polite phrasing.
 - Checks cover spawned task workers, cancellation, deadlines, direct command routing, memory/storage, PDF product audits, listing exports, simulated Gumroad requests, website access/metadata, saved searches, CurbSentry adapter behavior and Qt interface flows.
