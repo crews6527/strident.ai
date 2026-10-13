@@ -104,10 +104,15 @@ try {
     if (Test-Path -LiteralPath $iconPath -PathType Leaf) { $appIcon = $iconPath + ',0' }
     $shell = New-Object -ComObject WScript.Shell
     Write-Host ('Strident folder: ' + $root)
-    Save-StridentShortcut -Shell $shell -Desktop $desktop -Name 'Strident.AI' `
+    $version = 'unknown'
+    $versionFile = Join-Path $root 'pcs_agent\__init__.py'
+    $versionText = Get-Content -LiteralPath $versionFile -Raw
+    if ($versionText -match '__version__\s*=\s*"([0-9.]+)"') { $version = $Matches[1] }
+    $shortcutName = 'Strident.AI ' + $version
+    Save-StridentShortcut -Shell $shell -Desktop $desktop -Name $shortcutName `
         -Target $commandInterpreter -Arguments ('/D /C ""{0}""' -f $launcher) `
         -WorkingFolder $root -Description 'Launch Strident with its console window.' -Icon $appIcon
-    Write-Host 'Double-click Strident.AI on your Desktop to launch.'
+    Write-Host ('Double-click ' + $shortcutName + ' on your Desktop to launch this version.')
     Write-Host 'Keep the installed Strident folder in place. These shortcuts point to that folder.'
 } catch {
     Write-Host ('STOPPED: ' + $_.Exception.Message) -ForegroundColor Red

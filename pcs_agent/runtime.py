@@ -7,6 +7,7 @@ import re
 import threading
 import time
 import uuid
+from pathlib import Path
 from dataclasses import dataclass, field
 from .provider import Ollama, nonthinking_value
 from .tools import ToolRunner, format_tool_result, schemas
@@ -17,6 +18,8 @@ SYSTEM = """You are a personal assistant for Prompt Copy Studio's commercial sto
 
 
 def execute(command: str, config: dict, attachment: str, history: list, emit):
+    from . import __version__
+    emit({"kind": "log", "stage": True, "text": f"Strident.AI {__version__} | Source folder: {Path(__file__).resolve().parent.parent}"})
     started = time.monotonic()
     metrics = {"route": "model", "model_turns": 0, "tool_calls": 0,
                "reused_reads": 0, "metadata_cached": False}
@@ -42,7 +45,16 @@ def model_result(result, limit):
 
 
 def _execute(command, config, attachment, history, emit, metrics):
+    from .coding import command_parts, coding_task
+    coding = command_parts(command)
+    if coding:
+        return coding_task(*coding, config, emit, metrics)
     runner = ToolRunner(config, attachment)
+    from .compliance import request_url, collect
+    compliance_url = request_url(command, config['store_url'])
+    if compliance_url:
+        emit({"kind": "log", "stage": True, "text": "Route: compliance checks. Ollama will not be called."})
+        return collect(command, compliance_url, config, runner, emit, metrics)
     listing = re.fullmatch(r"draft listing (?:for |product )?([A-Za-z0-9_-]{1,80})[.!?]?", command.strip(), re.I)
     website_review = re.fullmatch(r"(?:review|audit|check) my (?:website|site) and (?:suggest|recommend) improvements[.!?]?", command.strip(), re.I)
     if listing or website_review:
@@ -81,6 +93,7 @@ def _execute(command, config, attachment, history, emit, metrics):
     plan = direct_plan(command)
     if plan:
         metrics["route"] = "direct" if len(plan) == 1 else "direct list"
+        emit({"kind": "log", "stage": True, "text": "Route: " + metrics['route'] + ". Ollama will not be called."})
         evidence = []
         for index, (name, args) in enumerate(plan):
             runner.explicit_memory = name in {"memory_save", "memory_forget"}
@@ -104,6 +117,7 @@ def _execute(command, config, attachment, history, emit, metrics):
                 "history": [{"role": "user", "content": command[:3000]},
                             {"role": "assistant", "content": reply[:6000]}]}
     chosen_tools = tool_names(command)
+    emit({"kind": "log", "stage": True, "text": "Route: model. This request did not match a direct or compliance command."})
     text_only = chosen_tools == set()
     if text_only and config.get("text_model"):
         config = {**config, "model": config["text_model"], "num_ctx": min(config["num_ctx"], 2048),
@@ -333,7 +347,11 @@ class Controller:
             self._event(task, {"kind": "started"})
             context = mp.get_context("spawn")
             receiver, sender = context.Pipe(duplex=False)
-            process = context.Process(target=self.worker, args=(sender, task.command, task.config, task.attachment, list(self.history)), daemon=True)
+            coding = bool(re.match(r'^/(?:code|testcode)\b', task.command.strip(), re.I))
+            worker_config = dict(task.config)
+            if coding:
+                worker_config['_coding_container'] = 'strident-code-' + task.id
+            process = context.Process(target=self.worker, args=(sender, task.command, worker_config, task.attachment, list(self.history)), daemon=True)
             started = time.monotonic()
             terminal = False
             last_wait_notice = started
@@ -348,7 +366,7 @@ class Controller:
                             "text": f"Task is still running ({now - started:.0f}s elapsed). Last stage: {task.last_stage or 'starting worker'}."})
                         last_wait_notice = now
                     if task.cancel.is_set() or self.closed.is_set():
-                        self._event(task, {"kind": "result", "status": "cancelled", "summary": "Worker stopped and its connection closed. Already launched apps remain open.", "reply": "", "evidence": []})
+                        self._event(task, {"kind": "result", "status": "cancelled", "summary": "Coding task cancelled; worker and sandbox cleanup follow. Saved revisions and observed evidence remain." if coding else "Worker stopped and its connection closed. Already launched apps remain open.", "reply": "", "evidence": []})
                         terminal = True
                         break
                     if time.monotonic() - started > task.config["task_timeout"]:
@@ -373,6 +391,13 @@ class Controller:
             except Exception as exc:
                 self._event(task, {"kind": "result", "status": "failed", "summary": str(exc), "reply": "", "evidence": []})
             finally:
+                owned_children = []
+                if coding and process.pid:
+                    import psutil
+                    try:
+                        owned_children = psutil.Process(process.pid).children(recursive=True)
+                    except psutil.Error:
+                        pass
                 if process.pid:
                     process.join(timeout=0.1)
                     if process.is_alive():
@@ -381,6 +406,21 @@ class Controller:
                     if process.is_alive():
                         process.kill()
                         process.join(timeout=0.5)
+                for child in owned_children:
+                    try:
+                        child.kill()
+                    except psutil.Error:
+                        pass
                 receiver.close()
                 sender.close()
+                if coding:
+                    try:
+                        from .coding import cleanup_container
+                        cleanup_container(worker_config['_coding_container'])
+                        self._callback({'id': task.id, 'kind': 'log', 'stage': True,
+                                        'text': 'Sandbox cleanup completed.'})
+                    except Exception as exc:
+                        self._event(task, {'kind': 'result', 'status': 'needs_attention',
+                                           'summary': 'Coding task ended; sandbox cleanup check failed: ' + str(exc),
+                                           'reply': '', 'evidence': []})
                 self.active = None

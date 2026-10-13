@@ -16,7 +16,7 @@ def main():
     args = parser.parse_args()
     if not 5 <= args.seconds <= 60:
         parser.error("Use 5 to 60 seconds.")
-    from PyQt6.QtCore import QTimer
+    from PyQt6.QtCore import QTimer, Qt
     from PyQt6.QtWidgets import QApplication
     from pcs_agent.config import load
     from pcs_agent.provider import Ollama
@@ -42,7 +42,8 @@ def main():
                 app.processEvents()
                 started_wall = time.monotonic()
                 started_cpu = time.process_time()
-                QTimer.singleShot(args.seconds * 1000, app.quit)
+                # Coarse timers can fire early and invalidate a complete sample.
+                QTimer.singleShot(args.seconds * 1000, Qt.TimerType.PreciseTimer, app.quit)
                 app.exec()
                 cpu = time.process_time() - started_cpu
                 elapsed = time.monotonic() - started_wall

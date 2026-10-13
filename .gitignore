@@ -18,6 +18,7 @@ store_drafts/
 website_reports/
 updates/
 backups/
+Coding/
 
 # Downloaded archives, executables and generated diagnostics
 *.zip

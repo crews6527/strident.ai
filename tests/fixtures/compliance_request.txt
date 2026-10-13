@@ -1,0 +1,68 @@
+Agent I do not want to get sued so Please check my Website(promptcopystudio.42web.io), and each available digital products and application. Optimize my website (SE0), (Hooks and triggers), (Key words), and (tags) and (Meta Data). For my applications to pass compliance checks by google and apple stores. Make sure each has the required following.
+
+Turn on RLS
+.keys server-side
+.lock admin routes
+Rate limit logins
+.Turnstile on forms
+.CSP + HSTS
+Npm audit
+Force HTTPS
+Error tracking
+Daily DB backups
+Honest lastmod
+Canonical tags
+Kill noindex
+LocalBusiness schema
+Author bylines
+No orphan pages
+Allow AI search bots
+INP <200ms
+Llms.txt
+FAQ schema
+SPF DKIM DMARC
+1-click unsubscribe
+Phone consent box
+Honour GPC
+Consent first
+Consent Mode v2
+WCAG 2.2 AA
+Meta Capi
+Enhanced conversions
+UTM into forms
+Limited Liability Clause
+Governing Law Clause
+Data deletion policy
+Indemnification clause
+Signup and Delete account Button
+Google or Apple login
+Privacy Labels
+Terms of Use
+Cookie policy
+Server side access
+Row-level security
+Verify email
+Hash password
+No local auth tokens
+Keep .env off GitHub
+No Secrets in logs
+Parameterized SQL
+Validate for inputs
+Verify webhooks
+Rate limit requests
+Tighten CORS
+Production debug off
+Patch Dependencies
+Vulnerability audit
+Product Requirement Documents
+Technical Requirements Documents
+App Flow
+Design Brief
+Background schema
+Implementation Plan
+Privacy Policy
+Target Keywords in( Page title, URL slug, H1 and in Product or Application Description)
+Accessibility compliance
+Terms and Conditions
+Cookie Policy
+Clear button labels

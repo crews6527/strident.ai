@@ -60,11 +60,19 @@ def schemas(names=None) -> list:
 
 def direct_command(text: str):
     """Only full, unambiguous matches bypass the model. Never discard trailing tasks."""
+    text = re.sub(r"^(?:please|can you(?: please)?|could you(?: please)?|would you(?: please)?)\s+(?=(?:open|launch|run|start|read|check|list|show|help)\b)",
+                  "", text.strip(), flags=re.I)
+    if re.match(r"^(?:open|launch|run|start|read|check|list|show|help)\b", text, re.I):
+        text = re.sub(r"(?:,\s*|\s+)please[.!?]*$", "", text, flags=re.I)
     address = text.strip()
     if re.fullmatch(r"https?://\S{1,1992}", address, re.I):
         return "read_web", {"url": address}
     domain = r"(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,63}(?::[0-9]{1,5})?(?:[/?#]\S*)?"
-    if len(address) <= 1992 and re.fullmatch(domain, address):
+    def is_domain(value):
+        # Windows executable names must retain desktop-app routing.
+        return (len(value) <= 1992 and re.fullmatch(domain, value)
+                and not re.search(r"\.(?:exe|cmd|bat|ps1|msi|lnk)$", value, re.I))
+    if is_domain(address):
         return "read_web", {"url": "https://" + address}
     clean = text.strip().rstrip(".!?").strip()
     lower = clean.casefold()
@@ -126,14 +134,20 @@ def direct_command(text: str):
     match = re.fullmatch(r"(?:search(?: the web)?(?: for)?|/search)\s+(.+)", clean, re.I)
     if match:
         return "search_web", {"query": match.group(1)}
-    match = re.fullmatch(r"(?:read(?: web)?|/web)\s+(https?://\S+)", clean, re.I)
+    match = re.fullmatch(r"(?:read(?: web)?|/web)\s+(\S+)", clean, re.I)
     if match:
-        return "read_web", {"url": match.group(1)}
+        value = match.group(1)
+        if re.fullmatch(r"https?://\S+", value, re.I):
+            return "read_web", {"url": value}
+        if is_domain(value):
+            return "read_web", {"url": "https://" + value}
     match = re.fullmatch(r"(?:open|launch|run|start)\s+(.+)", clean, re.I)
     if match:
         value = match.group(1).strip().strip('"')
         if re.fullmatch(r"https?://\S+", value, re.I):
             return "open_url", {"url": value}
+        if is_domain(value):
+            return "open_url", {"url": "https://" + value}
         # Multiple actions belong in the agent loop; do not launch only the first.
         if not re.search(r"\b(and|then|after|before)\b|[;\n]", value, re.I):
             return "open_app", {"app": value}
@@ -187,6 +201,8 @@ def format_tool_result(result: dict) -> str:
             lines.append(str(result[key]))
     if result.get("text"):
         lines.extend(["", str(result["text"])])
+    if result.get("output"):
+        lines.extend(["", str(result["output"])])
     for key in ("products", "entries", "facts", "posts", "files", "audit"):
         if result.get(key):
             lines.extend(["", json.dumps(result[key], indent=2, ensure_ascii=False)])
@@ -289,7 +305,7 @@ class ToolRunner:
     def run(self, name: str, arguments: dict) -> dict:
         specs = {n: a for n, _, a in TOOLS}
         if name == "help":
-            return {"ok": True, "summary": "Ready for tasks. Try: Check my website; Check my website for broken links; Read my website; Open my website; Save website report; List files; Show my products; Audit product <id>; Export listing <id>; Sync Gumroad; Show memory; Open Notepad; Search the web for <topic>. These commands work without model inference. Writing and complex requests use your selected local model. Live hosting edits require a hosting connection, which this app does not yet have.", "tools": [n for n, _, _ in TOOLS]}
+            return {"ok": True, "summary": "Ready for tasks. Try: Check my website; Check my website for broken links; Read my website; Open my website; Save website report; List files; Show my products; Audit product <id>; Export listing <id>; Sync Gumroad; Show memory; Open Notepad; Search the web for <topic>. These commands work without model inference. Writing and complex requests use your selected local model. Coding page: write Python projects and test/debug them in Docker. Console: sandbox status; /code project-name describe the task; /testcode project-name. Coding requires a working Linux Docker engine and python:3.12-slim image. Live hosting edits require a hosting connection, which this app does not yet have.", "tools": [n for n, _, _ in TOOLS]}
         if name not in specs or not isinstance(arguments, dict):
             raise ValueError("Unknown tool or invalid arguments.")
         if set(arguments) != set(specs[name]) or any(not isinstance(v, str) for v in arguments.values()):
