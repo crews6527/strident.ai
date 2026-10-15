@@ -7,6 +7,8 @@ Two defects caused those errors:
 - The new trace store used SQLite connections as transaction context managers but never explicitly closed the connections. Windows kept `task-traces.sqlite3` open and refused temporary-folder cleanup with WinError 32. All trace operations now commit or roll back within a context and close their connection in `finally`, including failed operations.
 - The instance lock read its first byte before obtaining the Windows byte-range lock. A second attempted instance encountered a raw permission error during that read, outside the cleanup handler, leaving another descriptor open. Acquisition now happens first, even for an empty file. Every failed acquisition or initialization closes its descriptor. Release also closes the descriptor if unlocking raises an error.
 
+The updater path assertion also compares resolved paths, so a Windows temporary directory using its 8.3 alias is correctly recognized as the same folder.
+
 The six new regression checks retain database connection references deliberately, so garbage collection cannot hide leaked handles on Linux. They also check rollback, contention before reads, initialization errors, unlock errors, and immediate lock-file reuse/deletion. Native Windows verification runs the entire suite, including the real Windows locking and file-deletion paths.
 
 The browser settings save also preserves the separately selected writing model. An activity response for an old task is discarded after the user changes selection. Browser numeric controls and version-confirmation messages match the backend and delivered version.
