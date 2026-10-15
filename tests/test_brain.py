@@ -59,7 +59,8 @@ class BrainTests(unittest.TestCase):
     def test_url_punctuation_and_quoted_data_not_split(self):
         self.assertEqual(len(direct_plan("https://example.com/?x=a;b")), 1)
         self.assertIsNone(direct_plan('Search for "first; Help"'))
-        self.assertIsNone(direct_plan("Open Notepad and Help"))
+        self.assertEqual([step[0] for step in direct_plan("Open Notepad and Help")], ["open_app", "help"])
+        self.assertIsNone(direct_plan("Open Notepad and write a poem"))
         self.assertIsNone(direct_plan(";".join(["Help"] * 7)))
 
     def test_friendly_prefix_keeps_full_command(self):

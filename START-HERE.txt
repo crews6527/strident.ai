@@ -1,26 +1,37 @@
-STRIDENT.AI 3.2.3: UPDATE THE COPY YOU ACTUALLY RUN
+STRIDENT.AI 3.3.0
 
+Update your existing Windows installation:
 1. Extract this ZIP fully into a separate folder.
-2. Exit existing Strident, including any tray instance.
-3. Run Apply-Strident-Update.cmd from the extracted update folder.
-4. Paste the EXISTING installation folder containing main.py and .venv.
-5. Source is backed up and verified. Failed verification rolls source back.
-   Personal settings/database are excluded. Installed pip dependencies remain.
-6. Run Launch-Strident.cmd from the EXISTING folder you updated.
-7. The window title must show Strident.AI 3.2.3. Enter: Check compliance
-8. Logs must show the build, source folder and Route: compliance checks.
-   That command must not print Requesting ... from Ollama.
+2. Exit Strident, its tray instance, and any standalone Live Preview console.
+3. Run Apply-Strident-Update.cmd in the extracted folder.
+4. Select the EXISTING Strident folder containing main.py and .venv.
+5. The updater backs up source, checks dependencies, and runs tests. On a
+   verification failure it restores the old source. Personal settings and the
+   existing studio.sqlite3 database are excluded from the update.
+6. Run Launch-Strident.cmd from the installation you updated. The window title
+   must show Strident.AI 3.3.0. Updating GitHub alone cannot update your PC copy.
 
-For a new copy, use Install-Strident.cmd instead. New desktop shortcuts include
-the version. Strident does not automatically download source from GitHub.
-Updating GitHub does not update an already extracted desktop installation.
+New installation: run Install-Strident.cmd instead. Requires Windows,
+Python 3.12 (64-bit) with the py launcher, Ollama and an installed model.
 
-For the separate model problem, run Check-Strident.cmd from the updated folder.
-It saves Downloads/Strident_Diagnostics.json with build, routing, server/model
-and memory evidence plus a bounded short probe of the exact selected model.
-Use --offline for no model requests. The diagnostic omits task text/history/keys.
+First checks:
+- Enter Help, then System health, then List files. No model is required.
+- In Settings, Refresh installed models, select an exact installed model, and
+  run Test writing model. Check the actual reply before saving.
+- If model generation fails, run Check-Strident.cmd. It writes a diagnostic
+  report to Downloads. A green server connection alone cannot prove inference.
+- Click Live preview / phone to open the browser console on this PC. It uses
+  the SAME queue, model, tools and results as the desktop application.
+- Export transcript saves task text, outputs and tool evidence. Review it
+  before sharing it here. ChatGPT does not automatically see this local window.
 
-174 tests pass on Linux/Python 3.12/offscreen Qt. Native Windows installation,
-shortcuts and actual Ollama inference remain unverified. This is not a claim
-that your inference engine or complete compliance requirements are repaired.
-Python 3.12 (64-bit) and network access for dependencies are needed.
+Phone:
+Close Strident, run Enable-Phone.cmd, then reopen Strident and click Live
+preview / phone. On your phone, connect Tailscale to the same network. Open
+the private .ts.net URL from setup and enter the access key printed there.
+Keep the PC awake, Strident running and the preview enabled. The phone sends
+work to the PC; it does not run the Windows app or Ollama on Android.
+
+The strident.ai.42web.io address was not deployed or connected by this update.
+The agent runs on the PC, not inside InfinityFree's shared web hosting.
+Read docs/repair-report.md for findings, checks and remaining device checks.

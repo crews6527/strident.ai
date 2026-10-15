@@ -1,4 +1,14 @@
-# Strident.AI
+# Strident.AI 3.3.0
+
+This update repairs the original desktop agent's task supervision and adds a browser console, durable task traces with explicit retry/export, and private phone access through Tailscale. Existing Store, Memory, Website, coding and CurbSentry adapter pages remain available.
+
+Start with [START-HERE.txt](START-HERE.txt). To update an existing Windows installation, extract the package separately, close the installed app, then run `Apply-Strident-Update.cmd`. To install a new copy, run `Install-Strident.cmd`. The update backs up source and rolls source back if verification fails. It does not replace your personal configuration or database.
+
+The former whole-task timeout is now a **worker inactivity deadline**. Actual model frames, tool results and worker stage transitions renew it. Parent-generated waiting notices do not. The model's 45-second socket wait remains unchanged. A separate configurable 900-second overall ceiling bounds a task even while it is making progress. Existing saved `task_timeout` values remain valid as the inactivity budget. Settings labels expose both controls.
+
+Click **Live preview / phone** for the local browser console, or use `Live-Preview.cmd` with the desktop app closed. For the phone, close Strident, run `Enable-Phone.cmd`, reopen Strident, and enable the preview. Keep the PC awake. See [phone setup and privacy](docs/live-preview.md) and the [repair report](docs/repair-report.md). This update does not publish the agent at `strident.ai.42web.io` and does not give ChatGPT automatic remote access to your PC.
+
+## Existing workflows and compatibility
 
 Strident is a Windows desktop assistant for Prompt Copy Studio. It uses Python 3.12, PyQt6 and a locally installed Ollama model. Version 3.2.3 logs the actual build, local source folder and selected route before every task. Check compliance explicitly runs available website/product checks without Ollama. Startup does not automatically download or synchronize GitHub source. It retains the 3.2.1 PDF dependency patch and the Coding page. Direct website commands and polite basic commands continue to bypass model inference. Browser handoff is reported separately from verified page rendering. The cleaned source excludes old release files, duplicate uploads and bundled development environments.
 
@@ -27,7 +37,7 @@ Try `Help`, `Open Notepad`, `Read my website`, `Check my website`, `List files`,
 
 Long requests to inspect a website for several security, privacy, SEO or compliance items now use a bounded check route with no Ollama request. The original request, public-page evidence, registered local product checks and remaining work are saved under `workspace/website_reports/compliance-*/`. A blocked website does not prevent the product checks. Up to ten local files are attempted, with 20 MB per-file and 60 MB batch limits; deferred product IDs are listed for separate checks. The task remains `needs_attention` because source implementation, hosting changes, legal review and store approval are separate work. See [compliance check scope](docs/compliance-checks.md).
 
-The website address is configured in Settings. Page reports and listing exports are saved locally. This desktop application has no hosting upload adapter, hosted chat endpoint, live Ring camera connection or background microphone capture. It does not publish website changes automatically. **Keep in tray** keeps it available while Windows is running and awake.
+The website address is configured in Settings. Page reports and listing exports are saved locally. The local authenticated preview is available on demand. This desktop application has no hosting upload adapter, public hosted agent endpoint, live Ring camera connection or background microphone capture. It does not publish website changes automatically. **Keep in tray** keeps it available while Windows is running and awake.
 
 ## Personal data and backup
 

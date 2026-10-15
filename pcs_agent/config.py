@@ -15,7 +15,11 @@ DEFAULTS = {
     "num_predict": 512,
     "request_timeout": 15,
     "model_timeout": 45,
-    "task_timeout": 60,
+    "task_timeout": 60,  # worker inactivity budget, renewed by real progress
+    "max_task_seconds": 900,  # explicit overall ceiling, never renewed
+    "preview_port": 8765,
+    "preview_key": "",
+    "preview_hosts": ["127.0.0.1", "localhost"],
     "keep_alive": "1m",
     "workspace": str(Path.home() / "Documents" / "PromptCopyStudio"),
     "apps": {},
@@ -44,9 +48,14 @@ def validate(data: dict) -> dict:
     _ = url.port  # validates malformed ports
     for key, low, high in (("num_ctx", 1024, 32768), ("num_thread", 1, 32),
                           ("num_predict", 64, 4096), ("request_timeout", 2, 120), ("model_timeout", 2, 120),
-                          ("task_timeout", 5, 300)):
+                          ("task_timeout", 5, 300), ("max_task_seconds", 5, 3600),
+                          ("preview_port", 1024, 65535)):
         if type(result[key]) is not int or not low <= result[key] <= high:
             raise ValueError(f"{key} must be an integer from {low} to {high}.")
+    if not isinstance(result['preview_key'], str) or (result['preview_key'] and len(result['preview_key']) < 32):
+        raise ValueError('Preview access key must be empty or at least 32 characters.')
+    if not isinstance(result['preview_hosts'], list) or not result['preview_hosts'] or any(not isinstance(h,str) or not __import__('re').fullmatch(r'[A-Za-z0-9.-]+',h) for h in result['preview_hosts']):
+        raise ValueError('Preview hosts must be exact hostnames without ports or paths.')
     if result["keep_alive"] not in {"0", "30s", "1m", "5m"}:
         raise ValueError("Invalid keep_alive setting.")
     for name in ("model", "text_model"):
@@ -92,9 +101,15 @@ def save(data: dict, path: Path | None = None) -> None:
     data = validate(data)
     path = path or config_path()
     path.parent.mkdir(parents=True, exist_ok=True)
-    temp = path.with_suffix(".tmp")
-    temp.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
-    temp.replace(path)
+    import tempfile
+    fd, name = tempfile.mkstemp(prefix='config-', dir=path.parent)
+    try:
+        with os.fdopen(fd, 'w', encoding='utf-8') as stream:
+            stream.write(json.dumps(data, indent=2) + '\n')
+        os.chmod(name, 0o600)
+        os.replace(name, path)
+    finally:
+        if os.path.exists(name): os.unlink(name)
 
 
 def import_rc1_settings(path, current):

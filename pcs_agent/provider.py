@@ -2,6 +2,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 import json
 import socket
+import time
 import urllib.error
 import urllib.request
 
@@ -76,8 +77,11 @@ class Ollama:
         reasoning_seen = False
         reasoning = ""
         done_reason = ""
+        started = time.monotonic()
+        first_frame = None
+        last_progress = 0.0
         seconds = self.config.get("model_timeout", 45)
-        emit({"kind": "log", "stage": True, "text": f"Requesting {self.config['model']} from Ollama. Model response wait: {seconds}s; task deadline: {self.config['task_timeout']}s."})
+        emit({"kind": "log", "stage": True, "text": f"Requesting {self.config['model']} from Ollama. Model response wait: {seconds}s; worker idle deadline: {self.config['task_timeout']}s; overall ceiling: {self.config.get('max_task_seconds', 900)}s."})
         with self._errors("/api/chat", seconds, "waiting for model output"):
             with self._open("/api/chat", payload, timeout=seconds) as response:
                 for raw in response:
@@ -89,6 +93,12 @@ class Ollama:
                     chunk = json.loads(raw)
                     if chunk.get("error"):
                         raise RuntimeError(str(chunk["error"]))
+                    now = time.monotonic()
+                    if first_frame is None:
+                        first_frame = now - started
+                    if now - last_progress >= 0.5 or chunk.get('done'):
+                        emit({'kind':'model_progress','received_bytes':total,'first_frame_seconds':round(first_frame,3)})
+                        last_progress = now
                     part = chunk.get("message", {})
                     reasoning += part.get("thinking", "")
                     if part.get("thinking") and not reasoning_seen:
@@ -103,6 +113,10 @@ class Ollama:
                     if chunk.get("done"):
                         done = True
                         done_reason = chunk.get("done_reason", "")
+                        elapsed = time.monotonic() - started
+                        duration = chunk.get('eval_duration',0)/1e9
+                        emit({'kind':'log', 'stage':False,
+                              'text':f"Generation: {elapsed:.3f}s; first frame {first_frame:.3f}s; load {chunk.get('load_duration',0)/1e9:.3f}s; {chunk.get('eval_count',0)/duration if duration else 0:.2f} tokens/s."})
                         break
         if not done:
             raise RuntimeError("The model stream ended before a completed response.")

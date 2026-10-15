@@ -86,7 +86,7 @@ class InstallationTests(unittest.TestCase):
         with patch('diagnose_install.Ollama') as model:
             result=installation_report(command='Check compliance',config=config)
         model.assert_not_called()
-        self.assertEqual(result['version'],'3.2.3')
+        self.assertEqual(result['version'],'3.3.0')
         self.assertEqual(result['route'],'compliance checks')
         self.assertFalse(result['will_call_ollama'])
         self.assertIn('no automatic GitHub sync',result['source_origin'])

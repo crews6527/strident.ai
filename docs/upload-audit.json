@@ -1,0 +1,56 @@
+{
+  "original_manifest_count": 55,
+  "supplied_manifest_entries": 30,
+  "still_not_uploaded": [
+    "Create-Desktop-Shortcut.cmd",
+    "Create-Desktop-Shortcut.ps1",
+    "Test-Ollama.cmd",
+    "assets/agent.ico",
+    "assets/face.png",
+    "diagnose_ollama.py",
+    "docs/curbsentry.md",
+    "docs/verification.md",
+    "inspect_directory.py",
+    "licenses/PyQt6-6.10.2.txt",
+    "licenses/PyQt6-Qt6-6.10.2.txt",
+    "licenses/PyQt6-sip-13.12.0.txt",
+    "licenses/psutil-7.2.2.txt",
+    "licenses/pyaes-1.6.1.txt",
+    "licenses/pypdf-6.10.0.txt",
+    "tests/test_brain.py",
+    "tests/test_core.py",
+    "tests/test_curbsentry.py",
+    "tests/test_idle.py",
+    "tests/test_ollama_fix.py",
+    "tests/test_process.py",
+    "tests/test_repair.py",
+    "tests/test_search_results.py",
+    "tests/test_store.py",
+    "tests/test_ui.py"
+  ],
+  "original_manifest_content_differences_after_new_upload": [],
+  "resolution": "Missing source, tests, helpers and licensed artwork were recovered from crews6527/strident.ai commit 992a0426706a3e0a83d2b2c78376ef6acee6ed38. Repository was newer than the uploads (3.2.3 vs 3.1.2); fixes preserve that newer baseline.",
+  "not_supplied": [
+    "user runtime config.json",
+    "Windows task logs and Ollama server logs",
+    "Ollama model weights",
+    "studio.sqlite3 personal data",
+    "actual PC hardware evidence",
+    "Tailscale account configuration",
+    "InfinityFree hosting access"
+  ],
+  "duplicate_pairs": [
+    [
+      "main.py",
+      "main(1).py"
+    ],
+    [
+      "README.md",
+      "README(1).md"
+    ],
+    [
+      "verify_app.py",
+      "verify_app(1).py"
+    ]
+  ]
+}
