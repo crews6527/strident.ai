@@ -82,7 +82,7 @@ def verify(target):
 def install(source, target, files, verifier=verify):
     if not (target / 'backups').resolve().is_relative_to(target.resolve()):
         raise ValueError('Backup folder resolves outside the installation.')
-    backup = target / 'backups' / ('strident-3.3.0-' + datetime.now().strftime('%Y%m%d_%H%M%S') + '-' + uuid.uuid4().hex[:6])
+    backup = target / 'backups' / ('strident-3.3.1-' + datetime.now().strftime('%Y%m%d_%H%M%S') + '-' + uuid.uuid4().hex[:6])
     backup.mkdir(parents=True)
     if not backup.resolve().is_relative_to(target.resolve()):
         raise ValueError('Backup folder resolves outside the installation.')
@@ -131,7 +131,7 @@ def main():
         backup = install(SOURCE, target, files)
         print('Source, installed tests and offline routing checks passed. Backup: ' + str(backup), flush=True)
         print('Launch this folder: ' + str(target / 'Launch-Strident.cmd'), flush=True)
-        print('Confirm Strident.AI 3.2.3 in the title. Enter Check compliance. The logs must say Route: compliance checks.', flush=True)
+        print('Confirm Strident.AI 3.3.1 in the title. Enter Check compliance. The logs must say Route: compliance checks.', flush=True)
         print('For the separate model problem, run Check-Strident.cmd in this installed folder and retain Strident_Diagnostics.json.', flush=True)
         return 0
     except Exception as exc:

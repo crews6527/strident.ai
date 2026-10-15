@@ -39,7 +39,7 @@ class InstallationTests(unittest.TestCase):
 
     def test_package_hashes_and_target_validation(self):
         files=manifest_files(self.source)
-        self.assertEqual(validate_target(self.target, files, self.source), self.target)
+        self.assertEqual(validate_target(self.target, files, self.source), self.target.resolve())
         self.assertIn('SHA256SUMS.txt', files)
         (self.source/'main.py').write_text('corrupted')
         with self.assertRaisesRegex(ValueError, 'checksum'): manifest_files(self.source)
@@ -86,7 +86,7 @@ class InstallationTests(unittest.TestCase):
         with patch('diagnose_install.Ollama') as model:
             result=installation_report(command='Check compliance',config=config)
         model.assert_not_called()
-        self.assertEqual(result['version'],'3.3.0')
+        self.assertEqual(result['version'],'3.3.1')
         self.assertEqual(result['route'],'compliance checks')
         self.assertFalse(result['will_call_ollama'])
         self.assertIn('no automatic GitHub sync',result['source_origin'])

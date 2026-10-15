@@ -1,4 +1,6 @@
-# Strident.AI 3.3.0
+# Strident.AI 3.3.1
+
+Version 3.3.1 fixes the Windows installation failure in 3.3.0: task-trace database connections now close deterministically, and instance locking acquires the lock before touching its protected byte. It also preserves the chosen writing model when browser settings change and prevents stale activity from appearing under a different task.
 
 This update repairs the original desktop agent's task supervision and adds a browser console, durable task traces with explicit retry/export, and private phone access through Tailscale. Existing Store, Memory, Website, coding and CurbSentry adapter pages remain available.
 
@@ -71,6 +73,6 @@ Application source is covered by [LICENSE.md](LICENSE.md). Dependencies have the
 
 ## Update the existing installation
 
-Extract the package separately, close Strident including its tray instance, run Apply-Strident-Update.cmd and select the existing folder containing main.py and .venv. The updater backs up source, verifies the installed copy and rolls source back on failure. Settings and databases are excluded; installed pip dependencies are not rolled back. Launch the selected folder and confirm Strident.AI 3.2.3 in the title. Desktop shortcuts now include the version.
+Extract the package separately, close Strident including its tray instance, run Apply-Strident-Update.cmd and select the existing folder containing main.py and .venv. The updater backs up source, verifies the installed copy and rolls source back on failure. Settings and databases are excluded; installed pip dependencies are not rolled back. Launch the selected folder and confirm Strident.AI 3.3.1 in the title. Desktop shortcuts now include the version.
 
 Check-Strident.cmd saves Downloads/Strident_Diagnostics.json with actual build/route evidence and a bounded text-only test of the exact selected model. Use --offline for no model calls or --command-file path.txt to inspect a supplied task route. The task text/history and keys are omitted from the diagnostic.
