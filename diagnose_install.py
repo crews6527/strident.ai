@@ -29,7 +29,9 @@ def installation_report(root=None, command='Check compliance', config=None):
             'route': 'compliance checks' if target else 'direct' if direct else 'model',
             'will_call_ollama': not (target or direct),
             'selected_model': config['model'], 'ollama_url': config['ollama_url'],
-            'model_timeout': config['model_timeout'], 'task_timeout': config['task_timeout']}
+            'model_timeout': config['model_timeout'], 'task_timeout': config['task_timeout'],
+            'task_timeout_semantics':'worker inactivity, renewed by actual progress',
+            'max_task_seconds':config.get('max_task_seconds',900)}
 
 
 def collect_model_evidence(config):

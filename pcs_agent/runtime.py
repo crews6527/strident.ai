@@ -49,6 +49,17 @@ def _execute(command, config, attachment, history, emit, metrics):
     coding = command_parts(command)
     if coding:
         return coding_task(*coding, config, emit, metrics)
+    if command.strip() == '/testmodel':
+        client=Ollama(config)
+        selected=config.get('text_model') or config['model']
+        if not selected: raise RuntimeError('Choose an exact installed model in Settings first.')
+        if selected not in {m['name'] for m in client.inspect(include_version=False)['models']}:
+            raise RuntimeError('Selected model is not installed under that exact name.')
+        metadata=client.json('/api/show',{'model':selected})
+        tested={**config,'model':selected,'num_predict':64,'num_ctx':min(config['num_ctx'],2048)}
+        answer=Ollama(tested).chat([{'role':'user','content':'Reply with READY only.'}],[],emit,think=nonthinking_value(metadata))
+        if answer.get('output_truncated'): raise RuntimeError('Model probe reached its output-token limit before a complete answer.')
+        return {'status':'complete','summary':'Real model generation completed. Review generation timings in the activity log.','reply':answer['content'],'evidence':[]}
     runner = ToolRunner(config, attachment)
     from .compliance import request_url, collect
     compliance_url = request_url(command, config['store_url'])
@@ -146,6 +157,9 @@ def _execute(command, config, attachment, history, emit, metrics):
     if think is False:
         emit({"kind": "log", "stage": True, "text": "Thinking is off for this task, as permitted by the model controls."})
     supports_tools = "tools" in show.get("capabilities", [])
+    if not text_only and not supports_tools:
+        return {'status':'needs_attention','summary':'This model does not advertise tool support. Use a direct command or choose a tool-capable installed model.',
+                'reply':'The action request was preserved, but no action was performed. Try Help for direct commands, which work without a model.', 'evidence':[]}
     offered = schemas(chosen_tools) if supports_tools else []
     allowed_tools = {s["function"]["name"] for s in offered}
     emit({"kind": "log", "text": f"Model: {config['model']} | tools: {'available' if supports_tools else 'unsupported'}"})
@@ -193,6 +207,8 @@ def _execute(command, config, attachment, history, emit, metrics):
             reply = message.get("content", "").strip()
             if not reply:
                 raise RuntimeError("The model returned an empty answer. Try a different installed model.")
+            if not text_only and not evidence:
+                return {'status':'needs_attention','summary':'Model answered without using the required action tools. No task action was verified.', 'reply':reply, 'evidence':[]}
             limited = message.get("output_truncated", False)
             return {"status": "needs_attention" if had_error or limited else "complete", "summary": "Reply reached the output-token limit; review the partial text." if limited else "Reply generated.",
                     "reply": reply, "evidence": evidence,
@@ -253,6 +269,7 @@ class Task:
     observed_evidence: list = field(default_factory=list)
     last_stage: str = ""
     finished: bool = False
+    partial_reply: str = ""
 
 
 class Controller:
@@ -262,6 +279,11 @@ class Controller:
         self.worker = worker
         self.tasks = {}
         self.storage = storage
+        self.journal = None
+        if storage:
+            from .trace import Store as TraceStore
+            self.journal = TraceStore(storage.path.parent)
+            self.journal.recover()
         self.history = storage.history() if storage else []
         self.queue = queue.Queue()
         self.closed = threading.Event()
@@ -271,6 +293,8 @@ class Controller:
         self.thread.start()
 
     def submit(self, command, config, attachment=""):
+        if not isinstance(command, str) or not command.strip() or len(command) > 12000:
+            raise ValueError("Enter a task between 1 and 12,000 characters.")
         if self.closed.is_set():
             raise RuntimeError("Console is shutting down.")
         with self.lock:
@@ -304,15 +328,33 @@ class Controller:
         self.closed.set()
         self.cancel_all()
         self.queue.put(None)
-        self.thread.join(timeout=2)
+        self.thread.join(timeout=8)
+        # Queued requests are terminal on shutdown; never replay side effects silently.
+        for task in list(self.tasks.values()):
+            if not task.finished:
+                self._event(task, {"kind":"result", "status":"cancelled", "summary":"Application closed before task completion.", "reply":"", "evidence":[]})
 
     def _callback(self, event):
+        if self.journal:
+            try:
+                ident=event['id'];kind=event['kind']
+                if kind=='queued':self.journal.create(event['command'],ident=ident)
+                elif kind=='started':self.journal.update(ident,status='running')
+                elif kind=='delta':self.journal.update(ident,result=self.journal.get(ident)['result']+event.get('text',''))
+                elif kind=='result':self.journal.update(ident,status=event['status'],result=event.get('reply',''),error=event.get('summary','') if event['status'] not in ('complete','answered') else '')
+                self.journal.event(ident,kind,{k:v for k,v in event.items() if k not in ('id','kind','history')})
+            except Exception:
+                logging.exception('Task trace could not be saved')
         try:
             self.callback(event)
         except Exception:
             logging.exception("Task callback failed; the queue remains available")
 
     def _event(self, task, event):
+        if event["kind"] == "delta":
+            task.partial_reply += event.get("text", "")
+        if event["kind"] == "result" and not event.get("reply") and task.partial_reply:
+            event = {**event, "reply": task.partial_reply}
         if event["kind"] == "log" and event.get("stage"):
             task.last_stage = str(event.get("text", ""))[:300]
         if event["kind"] == "tool":
@@ -355,6 +397,7 @@ class Controller:
             started = time.monotonic()
             terminal = False
             last_wait_notice = started
+            last_activity = started
             try:
                 process.start()
                 sender.close()
@@ -369,9 +412,11 @@ class Controller:
                         self._event(task, {"kind": "result", "status": "cancelled", "summary": "Coding task cancelled; worker and sandbox cleanup follow. Saved revisions and observed evidence remain." if coding else "Worker stopped and its connection closed. Already launched apps remain open.", "reply": "", "evidence": []})
                         terminal = True
                         break
-                    if time.monotonic() - started > task.config["task_timeout"]:
+                    inactivity = now - last_activity > task.config["task_timeout"]
+                    ceiling = now - started > task.config.get("max_task_seconds", 900)
+                    if inactivity or ceiling:
                         last_stage = task.last_stage or "No progress was reported by the worker."
-                        self._event(task, {"kind": "result", "status": "failed", "summary": f"Task reached its configured deadline; worker stopped. Last stage: {last_stage} Review any actions already recorded.", "reply": "", "evidence": []})
+                        self._event(task, {"kind": "result", "status": "failed", "summary": f"Task reached its {'overall task' if ceiling else 'no worker progress'} deadline; worker stopped. Last stage: {last_stage} Review any actions already recorded.", "reply": "", "evidence": []})
                         terminal = True
                         break
                     if receiver.poll(0.1):
@@ -379,6 +424,8 @@ class Controller:
                             event = receiver.recv()
                         except EOFError:
                             break
+                        if event["kind"] in {"delta", "tool", "model_progress"} or (event["kind"] == "log" and event.get("stage")):
+                            last_activity = time.monotonic()
                         self._event(task, event)
                         if event["kind"] == "result":
                             self.history.extend(event.get("history", []))

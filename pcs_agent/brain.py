@@ -62,7 +62,11 @@ def direct_plan(command):
     # Quoted separators are data. The model handles these requests as a whole.
     if re.search(r"[\"']", text) and re.search(r";|\n|\bthen\b", text, re.I):
         return None
-    parts = re.split(r"\s*;\s*|\s*\n\s*|\s+then\s+", text, flags=re.I)
+    parts = re.split(r"\s*;\s*|\s*\n\s*|\s+(?:and\s+)?then\s+", text, flags=re.I)
+    if len(parts) == 1 and re.search(r"\s+and\s+", text, re.I) and not re.search(r"[\"']", text):
+        candidates = re.split(r"\s+and\s+", text, flags=re.I)
+        if all(direct_command(p) for p in candidates):
+            parts = candidates
     if len(parts) > 6 or any(not p.strip() for p in parts):
         return None
     steps = []

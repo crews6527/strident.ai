@@ -107,7 +107,8 @@ class Settings(QDialog):
                     ("num_ctx", "Context tokens", 1024, 32768), ("num_predict", "Maximum reply tokens", 64, 4096),
                     ("request_timeout", "Network read timeout (seconds)", 2, 120),
                     ("model_timeout", "Model response wait (seconds)", 2, 120),
-                    ("task_timeout", "Whole task deadline (seconds)", 5, 300)):
+                    ("task_timeout", "Worker inactivity deadline (seconds)", 5, 300),
+                    ("max_task_seconds", "Overall task ceiling (seconds)", 5, 3600)):
             spin = QSpinBox()
             spin.setRange(low, high)
             spin.setValue(config[key])
@@ -126,7 +127,7 @@ class Settings(QDialog):
         self.assistant_name = QLineEdit(config["assistant_name"])
         form.addRow("Agent display name", self.assistant_name)
         root.addLayout(form)
-        root.addWidget(label("Model requests use a separate response wait. The whole task deadline still stops the worker. Metadata uses the network timeout.", "muted", True))
+        root.addWidget(label("Real model frames and tool results renew the worker inactivity deadline. The separate overall task ceiling always stops runaway work. Metadata and model socket waits are unchanged.", "muted", True))
         root.addWidget(label("Custom apps: name to absolute .exe path (JSON)", "eyebrow"))
         self.apps = QPlainTextEdit(json.dumps(config["apps"], indent=2))
         self.apps.setPlaceholderText('{"google chrome": "C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe"}')
@@ -251,6 +252,7 @@ class ConsoleWindow(QMainWindow):
         self.config = config
         self.preview = preview
         self.records = {}
+        self.preview_server = None
         self.attachment = ""
         self.bus = Bus()
         self.bus.event.connect(self.on_event)
@@ -445,6 +447,12 @@ class ConsoleWindow(QMainWindow):
         row.addWidget(dictate)
         row.addStretch()
         self.tray = None
+        live_button = QPushButton("Live preview / phone")
+        live_button.clicked.connect(self.open_live_preview)
+        header.insertWidget(header.count()-1, live_button)
+        export_button = QPushButton("Export transcript")
+        export_button.clicked.connect(self.export_transcript)
+        header.insertWidget(header.count()-1, export_button)
         tray_button = QPushButton("Keep in tray")
         tray_button.clicked.connect(self.keep_in_tray)
         row.addWidget(tray_button)
@@ -463,11 +471,37 @@ class ConsoleWindow(QMainWindow):
             self.timer.start()
         self.command.setFocus()
 
+    def open_live_preview(self):
+        if not self.controller:
+            return
+        try:
+            if self.preview_server is None:
+                from .preview import start_preview
+                self.preview_server = start_preview(self.config, self.controller)
+            import webbrowser
+            if not webbrowser.open(self.preview_server.launch_url, new=2):
+                raise RuntimeError('Open ' + self.preview_server.url + ' in your browser. The access key is available in the console settings file.')
+        except Exception as exc:
+            QMessageBox.warning(self, 'Live preview needs attention', str(exc))
+
+    def export_transcript(self):
+        if not self.controller or not self.controller.journal:
+            return
+        path, _ = QFileDialog.getSaveFileName(self, 'Save task transcript (review before sharing)', 'Strident-Transcript.json', 'JSON (*.json)')
+        if path:
+            try:
+                Path(path).write_text(json.dumps(self.controller.journal.export(), indent=2, ensure_ascii=False)+'\n', encoding='utf-8')
+            except Exception as exc:
+                QMessageBox.warning(self, 'Transcript could not be saved', str(exc))
+
     def navigate(self, title):
         if title == "Settings":
             dialog = Settings(self.config, self)
             if dialog.exec() == QDialog.DialogCode.Accepted:
                 self.config = dialog.config
+                if self.preview_server:
+                    self.preview_server.config = self.config
+                    self.preview_server.runtime.config = self.config
                 self.model_label.setText("Model: " + (self.config["model"] or "not selected"))
                 self.site_label.setText(self.config["store_url"])
                 self.folder_label.setText(self.config["workspace"])
@@ -685,6 +719,9 @@ class ConsoleWindow(QMainWindow):
             event.ignore()
             return
         self.timer.stop()
+        if self.preview_server:
+            self.preview_server.close()
+            self.preview_server = None
         self.curbsentry_page.stop()
         if self.controller:
             self.controller.close()

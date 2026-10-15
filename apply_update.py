@@ -21,9 +21,11 @@ def manifest_files(source):
         path = Path(relative)
         if path.is_absolute() or '..' in path.parts or relative in files:
             raise ValueError('Invalid package path.')
-        if (len(path.parts) > 1 and path.parts[0] not in {'pcs_agent', 'assets', 'docs', 'licenses', 'tests'}) or (len(path.parts) == 1 and (path.suffix not in {'.py', '.cmd', '.ps1', '.md', '.txt'} or path.name.startswith('.'))):
+        if (len(path.parts) > 1 and path.parts[0] not in {'pcs_agent', 'assets', 'docs', 'licenses', 'tests', 'web'}) or (len(path.parts) == 1 and (path.suffix not in {'.py', '.cmd', '.ps1', '.md', '.txt'} or path.name.startswith('.'))):
             if relative != '.gitignore':
                 raise ValueError('Package contains a non-source or private path: ' + relative)
+        if path.parts[0] == 'web' and relative not in {'web/index.html', 'web/app.js', 'web/style.css'}:
+            raise ValueError('Unexpected preview asset path: ' + relative)
         if not (source / path).resolve().is_relative_to(source.resolve()):
             raise ValueError('Package path escapes the source folder.')
         if hashlib.sha256((source / path).read_bytes()).hexdigest() != digest:
@@ -60,7 +62,7 @@ root=pathlib.Path(sys.argv[1]).resolve()
 for p in psutil.process_iter():
     try:
         args=p.cmdline()
-        if not any(pathlib.Path(a).name.lower() in {'main.py','verify_idle.py','diagnose_ollama.py','diagnose_install.py','configure_fast_writing.py'} for a in args): continue
+        if not any(pathlib.Path(a).name.lower() in {'main.py','live_preview.py','enable_phone.py','verify_idle.py','diagnose_ollama.py','diagnose_install.py','configure_fast_writing.py'} for a in args): continue
         if pathlib.Path(p.cwd()).resolve()==root or any(str(root).casefold() in a.casefold() for a in args):
             raise SystemExit('Close Strident and its diagnostics in this folder first. PID '+str(p.pid))
     except (psutil.NoSuchProcess,psutil.AccessDenied,psutil.ZombieProcess): pass
@@ -80,7 +82,7 @@ def verify(target):
 def install(source, target, files, verifier=verify):
     if not (target / 'backups').resolve().is_relative_to(target.resolve()):
         raise ValueError('Backup folder resolves outside the installation.')
-    backup = target / 'backups' / ('strident-3.2.3-' + datetime.now().strftime('%Y%m%d_%H%M%S') + '-' + uuid.uuid4().hex[:6])
+    backup = target / 'backups' / ('strident-3.3.0-' + datetime.now().strftime('%Y%m%d_%H%M%S') + '-' + uuid.uuid4().hex[:6])
     backup.mkdir(parents=True)
     if not backup.resolve().is_relative_to(target.resolve()):
         raise ValueError('Backup folder resolves outside the installation.')

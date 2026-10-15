@@ -1,0 +1,103 @@
+{
+  "test_suite": {
+    "tests": 183,
+    "result": "passed",
+    "platform": "Linux CPython 3.12, offscreen Qt",
+    "log_summary": "Ran 183 tests, OK"
+  },
+  "long_stream": {
+    "elapsed_seconds": 64.149,
+    "status": "complete",
+    "delta_count": 33,
+    "renewals": 33,
+    "worker_idle_budget": 5,
+    "model_socket_timeout": 45,
+    "crossed_59_seconds": true,
+    "test_dependency": "simulated Ollama HTTP server; actual NDJSON transport and spawned Strident worker",
+    "reply": "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 finished"
+  },
+  "direct_benchmark": [
+    {
+      "command": "Help",
+      "status": "complete",
+      "elapsed_seconds": 0.1215,
+      "metrics": {
+        "route": "direct",
+        "model_turns": 0,
+        "tool_calls": 1,
+        "reused_reads": 0,
+        "metadata_cached": false,
+        "execution_seconds": 0.002
+      }
+    },
+    {
+      "command": "System health",
+      "status": "complete",
+      "elapsed_seconds": 0.3031,
+      "metrics": {
+        "route": "direct",
+        "model_turns": 0,
+        "tool_calls": 1,
+        "reused_reads": 0,
+        "metadata_cached": false,
+        "execution_seconds": 0.208
+      }
+    },
+    {
+      "command": "List files",
+      "status": "complete",
+      "elapsed_seconds": 0.1175,
+      "metrics": {
+        "route": "direct",
+        "model_turns": 0,
+        "tool_calls": 1,
+        "reused_reads": 0,
+        "metadata_cached": false,
+        "execution_seconds": 0.003
+      }
+    },
+    {
+      "command": "Help and then List files",
+      "status": "complete",
+      "elapsed_seconds": 0.0898,
+      "metrics": {
+        "route": "direct list",
+        "model_turns": 0,
+        "tool_calls": 2,
+        "reused_reads": 0,
+        "metadata_cached": false,
+        "execution_seconds": 0.003
+      }
+    }
+  ],
+  "idle_check": {
+    "generated_utc": "2026-10-15T10:21:14.640222+00:00",
+    "elapsed_seconds": 30.003,
+    "console_cpu_seconds": 0.033414,
+    "console_cpu_percent_one_core": 0.111,
+    "console_cpu_percent_machine": 0.012,
+    "logical_cores": 9,
+    "tasks_submitted": 0,
+    "ollama_requests_attempted": 0,
+    "inference_requests_attempted": 0,
+    "ollama_access": "blocked and counted in this console process",
+    "microphone_capture": "not instrumented by this diagnostic",
+    "data_isolated": true,
+    "completed_sample": true,
+    "scope": "this Qt console process only; excludes Ollama and other applications",
+    "ok": true
+  },
+  "browser_check": {
+    "result": "not completed",
+    "reason": "No installed browser executable in source container; official browser download was unavailable. The separate cloud browser cannot reach this container loopback. API integration and native Qt tests passed."
+  },
+  "not_verified": [
+    "Windows installation and shortcuts",
+    "Visible Windows app/browser launches",
+    "Real Ollama generation on the user PC",
+    "Private Tailscale/Android connection",
+    "Public domain or InfinityFree deployment",
+    "Live external accounts and CurbSentry service",
+    "Actual Docker execution on the user PC"
+  ]
+}

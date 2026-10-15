@@ -29,6 +29,8 @@ def check_worker(pipe, config):
         test_config = {**config, "num_predict": 64, "num_ctx": min(config["num_ctx"], 2048)}
         response = Ollama(test_config).chat([{"role": "user", "content": "Reply with just: Hello."}], [], event, think=think)
         reply = response.get("content", "").strip()
+        if response.get("output_truncated"):
+            raise RuntimeError("The model probe hit its output-token limit; a complete short reply was not verified.")
         if not reply:
             raise RuntimeError("The text-only model check completed without an answer.")
         event({"kind": "result", "ok": True, "reply": reply[:500], "elapsed": round(time.monotonic() - started, 3)})
@@ -45,15 +47,19 @@ def run_check(config, emit=print, *, worker=check_worker, timeout=None):
     process = context.Process(target=worker, args=(sender, config), daemon=True)
     started = time.monotonic()
     last_stage = "starting the model check"
+    last_activity = started
+    overall = timeout if timeout is not None else config.get("max_task_seconds", 900)
     try:
         process.start()
         sender.close()
-        while time.monotonic() - started < limit:
+        while time.monotonic() - started < overall and time.monotonic() - last_activity < limit:
             if receiver.poll(0.05):
                 try:
                     value = receiver.recv()
                 except EOFError:
                     break
+                if value["kind"] in {"log", "delta", "model_progress"}:
+                    last_activity = time.monotonic()
                 if value["kind"] == "result":
                     return value
                 if value["kind"] == "log":
@@ -86,7 +92,7 @@ def main():
             raise ValueError("Choose and save an installed model in Strident Settings first.")
         print("Address: " + config["ollama_url"])
         print("Selected model: " + config["model"])
-        print(f"Metadata wait: {config['request_timeout']}s; model wait: {config['model_timeout']}s; whole check: {config['task_timeout']}s")
+        print(f"Metadata wait: {config['request_timeout']}s; model socket wait: {config['model_timeout']}s; worker idle limit: {config['task_timeout']}s; overall ceiling: {config.get('max_task_seconds', 900)}s")
         result = run_check(config)
         if result["ok"]:
             print("PASS: " + result["reply"])
