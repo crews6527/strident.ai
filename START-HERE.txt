@@ -1,4 +1,7 @@
-STRIDENT.AI 3.3.0
+STRIDENT.AI 3.3.1
+
+The failed 3.3.0 update rolled back source. Use this corrected package.
+Do not delete your settings, personal database or backup folder.
 
 Update your existing Windows installation:
 1. Extract this ZIP fully into a separate folder.
@@ -9,7 +12,7 @@ Update your existing Windows installation:
    verification failure it restores the old source. Personal settings and the
    existing studio.sqlite3 database are excluded from the update.
 6. Run Launch-Strident.cmd from the installation you updated. The window title
-   must show Strident.AI 3.3.0. Updating GitHub alone cannot update your PC copy.
+   must show Strident.AI 3.3.1. Updating GitHub alone cannot update your PC copy.
 
 New installation: run Install-Strident.cmd instead. Requires Windows,
 Python 3.12 (64-bit) with the py launcher, Ollama and an installed model.
