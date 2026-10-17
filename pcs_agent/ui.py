@@ -490,6 +490,8 @@ class ConsoleWindow(QMainWindow):
         path, _ = QFileDialog.getSaveFileName(self, 'Save task transcript (review before sharing)', 'Strident-Transcript.json', 'JSON (*.json)')
         if path:
             try:
+                if '..' in path:
+                    raise Exception('Invalid file path')
                 Path(path).write_text(json.dumps(self.controller.journal.export(), indent=2, ensure_ascii=False)+'\n', encoding='utf-8')
             except Exception as exc:
                 QMessageBox.warning(self, 'Transcript could not be saved', str(exc))
