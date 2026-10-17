@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import html
 import json
+import os
 import re
 from pathlib import Path
 import uuid
@@ -114,6 +115,10 @@ class Store:
         if not target.resolve().is_relative_to(workspace):
             raise PermissionError("Draft folder resolves outside the workspace.")
         folder = target / (title + "-" + uuid.uuid4().hex[:12])
+        base_real = os.path.realpath(target)
+        folder_real = os.path.realpath(folder)
+        if os.path.commonpath([base_real, folder_real]) != base_real:
+            raise ValueError("Invalid file path")
         folder.mkdir()
         return folder
 
