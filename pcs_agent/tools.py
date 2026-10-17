@@ -13,6 +13,7 @@ import urllib.parse
 import urllib.request
 import webbrowser
 import xml.etree.ElementTree as ET
+import defusedxml.ElementTree as DefusedET
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -354,7 +355,7 @@ class ToolRunner:
         url = "https://www.bing.com/search?format=rss&q=" + urllib.parse.quote(query)
         text, final, _, _ = fetch(url)
         try:
-            root = ET.fromstring(text)
+            root = DefusedET.fromstring(text)
         except ET.ParseError as exc:
             raise RuntimeError("Search endpoint did not return results. Try Open https://www.bing.com in your browser.") from exc
         results = [{"title": item.findtext("title", ""), "url": item.findtext("link", ""),
