@@ -24,3 +24,7 @@ It does not kill other applications, disable antivirus, add security exclusions,
 ## Verification limits
 
 Automated checks exercise startup, queue/progress/cancellation handling, model streaming via local test servers, generated-project validation, sandbox orchestration, and file/dependency drift. Windows GUI launch, installed Ollama performance, actual Docker execution and the specific failure on your computer require device evidence. No claim of a finished working local installation is made before those pass.
+
+## Confirmed Windows repairs
+
+Windows verification exposed unclosed task-trace SQLite handles and a lock-file read attempted before acquiring its Windows byte lock. Trace connections now close after both commit and rollback. Instance startup now avoids reading another process's locked byte and closes failed handles. These are confirmed defects; they do not prove which defect affected your installed copy.

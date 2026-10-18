@@ -8,12 +8,12 @@ class InstanceLock:
         root = Path(folder)
         root.mkdir(parents=True, exist_ok=True)
         self.stream = (root / "strident-instance.lock").open("a+b")
-        self.stream.seek(0)
-        if not self.stream.read(1):
-            self.stream.write(b"0")
-            self.stream.flush()
-        self.stream.seek(0)
         try:
+            # Do not read a byte locked by another Windows instance.
+            if os.fstat(self.stream.fileno()).st_size == 0:
+                self.stream.write(b"0")
+                self.stream.flush()
+            self.stream.seek(0)
             if os.name == "nt":
                 import msvcrt
                 msvcrt.locking(self.stream.fileno(), msvcrt.LK_NBLCK, 1)
@@ -27,8 +27,10 @@ class InstanceLock:
     def close(self):
         if self.stream.closed:
             return
-        if os.name == "nt":
-            import msvcrt
-            self.stream.seek(0)
-            msvcrt.locking(self.stream.fileno(), msvcrt.LK_UNLCK, 1)
-        self.stream.close()
+        try:
+            if os.name == "nt":
+                import msvcrt
+                self.stream.seek(0)
+                msvcrt.locking(self.stream.fileno(), msvcrt.LK_UNLCK, 1)
+        finally:
+            self.stream.close()

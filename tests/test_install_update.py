@@ -39,7 +39,7 @@ class InstallationTests(unittest.TestCase):
 
     def test_package_hashes_and_target_validation(self):
         files=manifest_files(self.source)
-        self.assertEqual(validate_target(self.target, files, self.source), self.target)
+        self.assertEqual(validate_target(self.target, files, self.source), self.target.resolve())
         self.assertIn('SHA256SUMS.txt', files)
         (self.source/'main.py').write_text('corrupted')
         with self.assertRaisesRegex(ValueError, 'checksum'): manifest_files(self.source)

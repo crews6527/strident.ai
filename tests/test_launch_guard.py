@@ -66,3 +66,19 @@ class LaunchGuardTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             self.assertIn('No model or task was run', result.stdout)
             self.assertTrue(list((root / 'PromptCopyStudioAgent/startup-logs').glob('*.log')))
+
+
+class ResourceCleanupTests(unittest.TestCase):
+    def test_trace_connection_closes_after_commit_and_rollback(self):
+        from pcs_agent.trace import Store
+        import sqlite3
+        with tempfile.TemporaryDirectory() as folder:
+            store = Store(folder)
+            with store.connect() as db:
+                db.execute("SELECT 1")
+            with self.assertRaises(sqlite3.ProgrammingError): db.execute("SELECT 1")
+            with self.assertRaisesRegex(ValueError, "abort"):
+                with store.connect() as failed:
+                    raise ValueError("abort")
+            with self.assertRaises(sqlite3.ProgrammingError): failed.execute("SELECT 1")
+            store.path.unlink()  # Windows rejects this if any handle leaked.
