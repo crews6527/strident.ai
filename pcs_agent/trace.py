@@ -1,4 +1,5 @@
 """Durable tasks and structured evidence, independent of the legacy schema."""
+from contextlib import contextmanager
 from pathlib import Path
 import sqlite3
 import json
@@ -14,8 +15,16 @@ class Store:
             CREATE TABLE IF NOT EXISTS tasks(id TEXT PRIMARY KEY,prompt TEXT NOT NULL,status TEXT NOT NULL,created REAL,updated REAL,result TEXT DEFAULT '',error TEXT DEFAULT '',parent TEXT);
             CREATE TABLE IF NOT EXISTS events(seq INTEGER PRIMARY KEY AUTOINCREMENT,task TEXT,created REAL,kind TEXT,payload TEXT);
             ''')
+    @contextmanager
     def connect(self):
-        db=sqlite3.connect(self.path,timeout=10);db.row_factory=sqlite3.Row;return db
+        db = sqlite3.connect(self.path, timeout=10)
+        db.row_factory = sqlite3.Row
+        try:
+            with db:
+                yield db
+        finally:
+            # sqlite3.Connection.__exit__ commits/rolls back but does not close.
+            db.close()
     def recover(self):
         with self.connect() as db:
             db.execute("UPDATE tasks SET status='interrupted',error='Application stopped. Review evidence before retrying.',updated=? WHERE status IN ('running','queued')",(time.time(),))

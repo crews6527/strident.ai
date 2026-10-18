@@ -131,7 +131,7 @@ def main():
         backup = install(SOURCE, target, files)
         print('Source, installed tests and offline routing checks passed. Backup: ' + str(backup), flush=True)
         print('Launch this folder: ' + str(target / 'Launch-Strident.cmd'), flush=True)
-        print('Confirm Strident.AI 3.2.3 in the title. Enter Check compliance. The logs must say Route: compliance checks.', flush=True)
+        print('Confirm Strident.AI 3.3.0 in the title. Enter Check compliance. The logs must say Route: compliance checks.', flush=True)
         print('For the separate model problem, run Check-Strident.cmd in this installed folder and retain Strident_Diagnostics.json.', flush=True)
         return 0
     except Exception as exc:

@@ -74,3 +74,7 @@ Application source is covered by [LICENSE.md](LICENSE.md). Dependencies have the
 Extract the package separately, close Strident including its tray instance, run Apply-Strident-Update.cmd and select the existing folder containing main.py and .venv. The updater backs up source, verifies the installed copy and rolls source back on failure. Settings and databases are excluded; installed pip dependencies are not rolled back. Launch the selected folder and confirm Strident.AI 3.2.3 in the title. Desktop shortcuts now include the version.
 
 Check-Strident.cmd saves Downloads/Strident_Diagnostics.json with actual build/route evidence and a bounded text-only test of the exact selected model. Use --offline for no model calls or --command-file path.txt to inspect a supplied task route. The task text/history and keys are omitted from the diagnostic.
+
+## Guarded recovery for a Windows copy that will not open
+
+Use the [guarded recovery instructions](docs/guarded-recovery.md). Extract the updated package into a new folder, run Recover-Strident.cmd, then Launch-Strident.cmd there. This preserves existing user data and captures startup errors. It does not disable security tools or promise protection from all other software.
