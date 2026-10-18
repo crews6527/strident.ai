@@ -81,9 +81,13 @@ def child_main():
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('--integrity', action='store_true', help='Check only package files before installing dependencies')
     parser.add_argument('--check', action='store_true', help='Check files, dependencies and configuration without starting inference')
     parser.add_argument('--child', action='store_true', help=argparse.SUPPRESS)
     args = parser.parse_args()
+    if args.integrity:
+        print('Verified application files:', check_integrity())
+        return 0
     if args.child:
         return child_main()
     log_root = Path(os.environ.get('LOCALAPPDATA', str(Path.home()))) / 'PromptCopyStudioAgent' / 'startup-logs'

@@ -18,7 +18,7 @@ try {
     & py -3.12 -I -c 'import sys; assert sys.version_info[:2] == (3,12)'
     if ($LASTEXITCODE -ne 0) { throw 'Python 3.12 is unavailable.' }
     # Validate the package BEFORE renaming the previous environment.
-    & py -3.12 -I -c 'import runpy,sys; m=runpy.run_path(sys.argv[1]); print("Verified files:", m["check_integrity"]())' (Join-Path $root 'guard_strident.py')
+    & py -3.12 -I (Join-Path $root 'guard_strident.py') --integrity
     if ($LASTEXITCODE -ne 0) { throw 'Package validation failed. Extract the recovery package into a separate folder.' }
     if (Test-Path -LiteralPath $environment) { Move-Item -LiteralPath $environment -Destination $backup; $renamed = $true }
     $created = $true
