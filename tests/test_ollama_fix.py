@@ -173,9 +173,12 @@ class OllamaFixTests(unittest.TestCase):
             path.write_text(raw)
             value = load(path)
             self.assertEqual(value["request_timeout"], 7)
-            self.assertEqual(value["task_timeout"], 60)
+            # Former 60s default is migrated to 180 so tasks can stay open longer than 59s
+            self.assertEqual(value["task_timeout"], 180)
             self.assertEqual(value["model_timeout"], 45)
-            self.assertEqual(path.read_text(), raw)
+            # File is rewritten by the migration
+            self.assertNotEqual(path.read_text(), raw)
+            self.assertIn("\"task_timeout\": 180", path.read_text().replace(" ", ""))
 
     def test_direct_model_diagnostic_completes_without_tools(self):
         with server_for() as (address, captured):
