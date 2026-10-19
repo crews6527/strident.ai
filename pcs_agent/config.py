@@ -15,7 +15,7 @@ DEFAULTS = {
     "num_predict": 512,
     "request_timeout": 15,
     "model_timeout": 45,
-    "task_timeout": 60,  # worker inactivity budget, renewed by real progress
+    "task_timeout": 180,  # worker inactivity budget, renewed by real progress
     "max_task_seconds": 900,  # explicit overall ceiling, never renewed
     "preview_port": 8765,
     "preview_key": "",
@@ -93,6 +93,11 @@ def load(path: Path | None = None) -> dict:
     data = validate(json.loads(path.read_text(encoding="utf-8")))
     if data["assistant_name"] == "Studio":
         data["assistant_name"] = "Strident"
+        save(data, path)
+    # Upgrade the former 60s default inactivity budget so tasks can stay open longer than 59s
+    # without real progress. Users who deliberately set a different value keep it.
+    if data.get("task_timeout") == 60:
+        data["task_timeout"] = 180
         save(data, path)
     return data
 
