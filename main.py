@@ -3,10 +3,15 @@ import sys
 
 
 def main():
+    from PyQt6.QtCore import Qt
     from PyQt6.QtWidgets import QApplication, QMessageBox
     from pcs_agent.config import load
     from pcs_agent.ui import ConsoleWindow
+    # Avoid blurry text on high-DPI displays (Windows scaling).
+    QApplication.setHighDpiScaleFactorRoundingPolicy(
+        Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     app = QApplication(sys.argv)
+    app.setAttribute(Qt.ApplicationAttribute.AA_UseHighDpiPixmaps)
     app.setApplicationName("Strident.AI")
     app.setStyle("Fusion")
     try:
