@@ -244,5 +244,5 @@ class CodingUiTests(unittest.TestCase):
                 window.coding_page.generate()
                 self.assertEqual(submit.call_args.args[0],'/code demo Write an adder and test it')
                 self.assertEqual(submit.call_args.kwargs['config']['task_timeout'],180)
-                self.assertEqual(window.config['task_timeout'],60)
+                self.assertEqual(window.config['task_timeout'],180)
             window.close()
