@@ -1,0 +1,17 @@
+{
+  "generated_utc": "2026-10-22T20:52:57.907468+00:00",
+  "elapsed_seconds": 5.004,
+  "console_cpu_seconds": 0.014345,
+  "console_cpu_percent_one_core": 0.287,
+  "console_cpu_percent_machine": 0.032,
+  "logical_cores": 9,
+  "tasks_submitted": 0,
+  "ollama_requests_attempted": 0,
+  "inference_requests_attempted": 0,
+  "ollama_access": "blocked and counted in this console process",
+  "microphone_capture": "not instrumented by this diagnostic",
+  "data_isolated": true,
+  "completed_sample": true,
+  "scope": "this Qt console process only; excludes Ollama and other applications",
+  "ok": true
+}

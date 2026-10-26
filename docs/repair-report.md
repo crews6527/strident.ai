@@ -1,3 +1,5 @@
+Historical documentation from the supplied build. For the October 22 repair and account behavior, read repair-report-2026-10-22.md and service-readiness.md.
+
 # Strident.AI repair report
 
 Prepared October 15, 2026. Delivered source version: 3.3.0. Base: the original `crews6527/strident.ai` repository at commit `992a0426706a3e0a83d2b2c78376ef6acee6ed38` (version 3.2.3), preserving its newer coding/compliance and existing business workflows.

@@ -1,37 +1,31 @@
-STRIDENT.AI 3.3.0
+STRIDENT.AI 3.3.1 REPAIRED PRIVATE TEST BUILD
 
-Update your existing Windows installation:
-1. Extract this ZIP fully into a separate folder.
-2. Exit Strident, its tray instance, and any standalone Live Preview console.
-3. Run Apply-Strident-Update.cmd in the extracted folder.
-4. Select the EXISTING Strident folder containing main.py and .venv.
-5. The updater backs up source, checks dependencies, and runs tests. On a
-   verification failure it restores the old source. Personal settings and the
-   existing studio.sqlite3 database are excluded from the update.
-6. Run Launch-Strident.cmd from the installation you updated. The window title
-   must show Strident.AI 3.3.0. Updating GitHub alone cannot update your PC copy.
+1. Extract the ZIP completely into a new folder.
+2. Run Install-Strident.cmd (Python 3.12 is required).
+3. Run Live-Test.cmd to open an isolated test installation.
+4. Expand First administrator setup in the browser. The launch window shows
+   the setup key; the browser opened by the launcher fills it for you.
+5. Choose your administrator username and a password of 15+ characters.
+6. Run Help. Create a user account under Create user account. Log out, then
+   use User login to verify its separate task history. Both login buttons
+   authenticate against the same server; stored account role controls access.
+7. As administrator, open Settings, choose your exact installed Ollama model,
+   save and press Test saved model. Ollama must be running on this computer.
 
-New installation: run Install-Strident.cmd instead. Requires Windows,
-Python 3.12 (64-bit) with the py launcher, Ollama and an installed model.
+No default passwords, test accounts, model files or private data are included.
+The isolated test keeps data in .live-test and leaves personal agent data alone.
 
-First checks:
-- Enter Help, then System health, then List files. No model is required.
-- In Settings, Refresh installed models, select an exact installed model, and
-  run Test writing model. Check the actual reply before saving.
-- If model generation fails, run Check-Strident.cmd. It writes a diagnostic
-  report to Downloads. A green server connection alone cannot prove inference.
-- Click Live preview / phone to open the browser console on this PC. It uses
-  the SAME queue, model, tools and results as the desktop application.
-- Export transcript saves task text, outputs and tool evidence. Review it
-  before sharing it here. ChatGPT does not automatically see this local window.
+To update your existing personal installation, close Strident and use
+Apply-Strident-Update.cmd. Select the OLD installation folder. The updater
+backs up source and verifies the replacement. Create the personal administrator
+with Setup-Admin.cmd, then use Live-Preview.cmd or the desktop preview button.
+Recreate the shortcut with Create-Desktop-Shortcut.cmd if it still opens an old
+copy. The running window must identify version 3.3.1 and the expected folder.
 
-Phone:
-Close Strident, run Enable-Phone.cmd, then reopen Strident and click Live
-preview / phone. On your phone, connect Tailscale to the same network. Open
-the private .ts.net URL from setup and enter the access key printed there.
-Keep the PC awake, Strident running and the preview enabled. The phone sends
-work to the PC; it does not run the Windows app or Ollama on Android.
+Verification: 195 automated tests passed, browser account/task flows passed,
+idle check passed, and pinned dependency audit found no known vulnerabilities.
+Your Windows shortcut, installed Ollama model generation, Tailscale phone path
+and public deployment were not verified from this environment.
 
-The strident.ai.42web.io address was not deployed or connected by this update.
-The agent runs on the PC, not inside InfinityFree's shared web hosting.
-Read docs/repair-report.md for findings, checks and remaining device checks.
+Read docs/repair-report-2026-10-22.md and docs/service-readiness.md.
+This is a personal/private testing release, not an approved public service.

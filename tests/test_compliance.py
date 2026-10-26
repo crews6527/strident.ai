@@ -87,7 +87,7 @@ class ComplianceTests(unittest.TestCase):
 
     def test_runtime_identity_and_route_are_visible_before_model(self):
         _, events = self.run_request()
-        self.assertIn('Strident.AI 3.3.0', events[0]['text'])
+        self.assertIn('Strident.AI ' + __import__('pcs_agent').__version__, events[0]['text'])
         self.assertIn('Source folder:', events[0]['text'])
         self.assertTrue(any('Route: compliance checks' in e.get('text', '') for e in events))
 
@@ -164,7 +164,7 @@ class ComplianceTests(unittest.TestCase):
             self.assertEqual(record['metrics']['model_turns'], 0)
             self.assertIn('Available checks finished', window.results.toPlainText())
             self.assertIn('No model inference', window.console.toPlainText())
-            self.assertIn('Strident.AI 3.3.0', window.windowTitle())
+            self.assertIn('Strident.AI ' + __import__('pcs_agent').__version__, window.windowTitle())
             self.assertTrue(any(r.get('audit', {}).get('pages') == 1 for r in record['evidence']))
             saved = State(self.config['data_dir']).tool_result({'compliance_report'})
             self.assertTrue(Path(saved[1]['files'][1]).is_file())

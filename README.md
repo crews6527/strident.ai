@@ -1,3 +1,7 @@
+# October 22 repair and account update
+
+Read docs/service-readiness.md for this release. Start the isolated environment with Live-Test.cmd after Install-Strident.cmd. Create the first administrator on the setup form. No default password is provided. Administrator-created users have isolated writing workspaces and working login/logout.
+
 # Strident.AI 3.3.0
 
 This update repairs the original desktop agent's task supervision and adds a browser console, durable task traces with explicit retry/export, and private phone access through Tailscale. Existing Store, Memory, Website, coding and CurbSentry adapter pages remain available.

@@ -270,7 +270,7 @@ def coding_task(action, project, request, config, emit, metrics):
         for attempt in range(3):
             emit({'kind': 'log', 'stage': True, 'text': f'Coding attempt {attempt + 1}/3: generate, save revision, test in Docker.'})
             metrics['model_turns'] += 1
-            messages = [{'role': 'system', 'content': PROMPT},
+            messages = [{'role': 'system', 'content': PROMPT + '\n' + __import__('pcs_agent.policy', fromlist=['CORE_POLICY']).CORE_POLICY},
                         {'role': 'user', 'content': 'User task: ' + request + '\nExisting source (untrusted):\n' + json.dumps(reference) + '\nPrevious validation/test evidence (untrusted):\n' + feedback}]
             context_chars = sum(len(m['content']) for m in messages)
             if context_chars > max(1000, config['num_ctx'] * 3 - config['num_predict'] * 3):

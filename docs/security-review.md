@@ -1,3 +1,5 @@
+Historical documentation from the supplied build. For the October 22 repair and account behavior, read repair-report-2026-10-22.md and service-readiness.md.
+
 # Dependency security review: October 11, 2026
 
 Strident 3.2.1 updates pypdf from 6.10.0 to 6.20.0. The initial pip-audit report listed 49 vulnerability entries for the older pinned PDF reader, largely involving resource exhaustion from malformed PDFs. The official supported 6.x release keeps the reader API used by Strident. The local audit and compatibility tests cover the pinned Python packages, not every Windows executable, Qt native component, Ollama model, operating-system component or deployment.

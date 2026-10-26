@@ -1,0 +1,1 @@
+{"dependencies": [{"name": "pyqt6", "version": "6.10.2", "vulns": []}, {"name": "pyqt6-qt6", "version": "6.10.2", "vulns": []}, {"name": "pyqt6-sip", "version": "13.12.0", "vulns": []}, {"name": "psutil", "version": "7.2.2", "vulns": []}, {"name": "pypdf", "version": "6.21.1", "vulns": []}, {"name": "pyaes", "version": "1.6.1", "vulns": []}], "fixes": []}

@@ -1,0 +1,1319 @@
+{
+  "scope": "Full original requested checklist. Unverified rows are requirements, not certification. See repair-report-2026-10-22.md for tested implementations.",
+  "items": [
+    {
+      "requested": "Agent I do not want to get sued so Please check my Website(promptcopystudio.42web.io), and each available digital products and application. Optimize my website (SE0), (Hooks and triggers), (Key words), and (tags) and (Meta Data). For my applications to pass compliance checks  by google and apple stores. Make sure each has the required following and create and add anything that we overlooked.:",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "Turn on RLS",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "keys server-side",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "lock admin routes",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Rate limit logins",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Turnstile on forms",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "CSP + HSTS",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Npm audit",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Force HTTPS",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Error tracking",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Daily DB  backups",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Honest lastmod",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "Canonical tags",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "Kill noindex",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "LocalBusiness schema",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "Author bylines",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "No orphan pages",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "Allow AI  search bots",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "INP <200ms",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "Llms.txt",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "FAQ schema",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "SPF DKIM DMARC",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "1-click unsubscribe",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "Phone consent box",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "Honour GPC",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "Consent first",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "Consent Mode v2",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "WCAG 2.2 AA",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "Meta Capi",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "Enhanced conversions",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "UTM into forms",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "Limited Liability Clause",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Governing Law Clause",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Data deletion policy",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Indemnification clause",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Signup and Delete  account Button",
+      "category": "store and identity",
+      "status": "unverified",
+      "needed": "Actual account flow, native build, SDK/data inventory and store declarations."
+    },
+    {
+      "requested": "Google or Apple login",
+      "category": "store and identity",
+      "status": "unverified",
+      "needed": "Actual account flow, native build, SDK/data inventory and store declarations."
+    },
+    {
+      "requested": "Privacy Labels",
+      "category": "store and identity",
+      "status": "unverified",
+      "needed": "Actual account flow, native build, SDK/data inventory and store declarations."
+    },
+    {
+      "requested": "Terms of Use",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Cookie policy",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Server side access",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Row-level security",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Verify email",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Hash password",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "No local auth tokens",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Keep .env off GitHub",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "No Secrets in logs",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Parameterized SQL",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Validate for inputs",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "Verify webhooks",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Rate limit requests",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Tighten CORS",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Production debug off",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Patch Dependencies",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Vulnerability audit",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Product Requirement Documents",
+      "category": "planning",
+      "status": "unverified",
+      "needed": "Application source and current behavior to document requirements, schema and release gates."
+    },
+    {
+      "requested": "Technical Requirements Documents",
+      "category": "planning",
+      "status": "unverified",
+      "needed": "Application source and current behavior to document requirements, schema and release gates."
+    },
+    {
+      "requested": "App Flow",
+      "category": "planning",
+      "status": "unverified",
+      "needed": "Application source and current behavior to document requirements, schema and release gates."
+    },
+    {
+      "requested": "Design Brief",
+      "category": "planning",
+      "status": "unverified",
+      "needed": "Application source and current behavior to document requirements, schema and release gates."
+    },
+    {
+      "requested": "Background schema",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "Implementation Plan",
+      "category": "planning",
+      "status": "unverified",
+      "needed": "Application source and current behavior to document requirements, schema and release gates."
+    },
+    {
+      "requested": "Privacy Policy",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Target Keywords in( Page title, URL slug, H1 and in Product or Application Description)",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "Accessibility compliance",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "Terms and Conditions",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Cookie Policy",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Clear button labels",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "Password Reset",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Email verification",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Loading states",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Empty states",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Clear error messages",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Form Validation",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Rate limiting",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Database backups",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Row level security",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "API keys off the frontend",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Mobile layout",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Analytics installed",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Error tracking",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Onboarding flow",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Terms Page",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Accessibility Page",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "Custom 404 page",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Delete account button",
+      "category": "store and identity",
+      "status": "unverified",
+      "needed": "Actual account flow, native build, SDK/data inventory and store declarations."
+    },
+    {
+      "requested": "Real Login and Logout",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "A.I. use notification Page",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "CTA  Above the Fold",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Meta Title per page",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Meta Description per page",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Open Graph Image",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Robots.txt",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Sitemap xml",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Alt text on everyimage",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Mobile breakpoints",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Sticky mobile CTA",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Loading States",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Thank You Page",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Cookie banner",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Real Contact Details",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Accessibility Policy Page",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "Exposed database credentials",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Public \".en\" files",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Hardcoded API Keys",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Weak or missing authentication",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Missing Server side authorization",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "User's accessing other users data",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Open database read/write permission",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Misconfigured Firebase, Supabase, S3, or storage buckets",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Unprotected Admin routes",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "exposed debug pages or developer tools",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Build logs leaking secrets",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Error message exposing stack traces",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Secrets exposed in frontend JavaScript",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Secrets committed to Git History",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Client side only security checks",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Missing input validation",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "SQL injection",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "NOSQL Injection",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Phishing attacks protection",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Brute Force Attacks protection",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Session Hijacking Protection",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Exposed private files",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Broken access control",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Remote code execution protection",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "AI Prompt injection protection",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Legal basis for data collection",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Third Party Disclosure",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Data Security",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Data Breach Procedure",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Open source licenses",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Payments and subscription page",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Marketing Consent",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "Authentication :Can users log in securely",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Authorization: Can users access only what they are allowed to?",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Database security: Are database permissions and row-level security configured correctly?",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Payment Security: Are payment webhooks verified (server-side).",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "File Uploads: Are uploaded files validated and access-controlled?",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Tenant Isolation: Can one customer access another customer's data.",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Backups and Monitoring: Can you detect problems and recover from failures?",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Rate limiting: Can this app prevent abuse and excessive request?",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Security Testing: Test app vulnerabilities before launch.",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Restrict CORS  properly",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Add Security Headers",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Isolate User Data",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Never Trust Frontend User ID's",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "prevent duplicate payments",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "prevent duplicate subscriptions",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "set API  Limits",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "set spending caps",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "add loading states",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "add error handling",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "handle failed request",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "handle API  timeouts",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "optimize db  queries",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "add DB indexes",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "paginate Lg results",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "compress files",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "limit upload size",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "cache repeated request",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "uptime monitoring",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "error logging",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "test backup restore",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "test simultaneous users",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "cancel button",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "delete account button: (Deletes login and data)",
+      "category": "store and identity",
+      "status": "unverified",
+      "needed": "Actual account flow, native build, SDK/data inventory and store declarations."
+    },
+    {
+      "requested": "Age check",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Unsubscribe Button",
+      "category": "data and marketing",
+      "status": "unverified",
+      "needed": "Actual forms, tags, providers and server-side processing; add controls only for features used."
+    },
+    {
+      "requested": "Stripe inside of app",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Missing Google or Apple Sign-in",
+      "category": "store and identity",
+      "status": "unverified",
+      "needed": "Actual account flow, native build, SDK/data inventory and store declarations."
+    },
+    {
+      "requested": "broken demo login",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "ipad UI  broken",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Outdated screenshots",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "\"Coming Soon\" Screens",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Broken links",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Restore purchase broken",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "website user account deletion button",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "comment features",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "comment features with report button",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Broken Password Reset button",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Cross platform Security",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Cross platform Request forgery",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "path traversal",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "SSRF",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Weak session management",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Exposed Environments",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "default credentials",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "FE Payment checks",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "IDOR/BOLA",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "APIS and user input",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "Exposed logs",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "JWT  secrets",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Premissive CORS",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "Humanize Agents Writing.",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Privacy Policy",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "1.Real Person Rewrite: \"You are an editor with a sharp eye for writing that reads as constructed, not spoken. Rewrite this the way someone who actually lived it would say it, a little rougher, more direct. Cut anything that feels rehearsed, overbuilt, or written to sound impressive.\"",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "2.Though Flow: \"This is not a grammar fix. It is a thinking fix. Rewrite this so the ideas move the ay a real mind moves: uneven in places, punchy in others, sometimes slower. Break any pattern where the writing feels too controlled or too heavily paced.\"",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "3.\"You specialize in spotting the tells that expose AI  writing. Go through this and strip them out one by one. Vary, the structure, soften rigid phrasing, and make each word feel chosen in the moment, not generated by a pattern.\"",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "4.Voice Shaper: \"You are building a voice that sounds like it belongs to one real person. Rewrite this so it carries a clear point of view, not the tone of a neutral observer trying to please everyone. Let opinions, small contradictions, and natural shifts in tone come through.\"",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "5.Make it Hit: \"Rewrite this with one goal: it should land when someone reads it. Keep what matters, but cut anything that feels flat, calculated, or forgettable. It should sound like it came from someone who actually cares.\"",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "6.The Credibility Test: \"You are a reader who immediately distrusts writing that sounds too clean. Go sentence by sentence and rewrite anything that feels constructed, overcorrected, or too precise. It should read like something a real person said out loud without second-guessing every word.\"",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "Agent Engineering Instructions:",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "1. Engineer: \"Act like a senior full stack engineer building a production-ready startup MVP from scratch. First design the complete system architecture, then build the most minimal but scabble version possible. Include: System Architecture, File Structure, Database schema, API Endpoints, UI  architecture, Production-ready code. Build it like a real startup that could-scale to millions of users.\"",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "2. Code Auditor: :Act as a senior engineer joining a large unfamiliar codebase. Reverse-engineer the architecture and end-to-end data flow. Identify architecture flaws, duplicate logic, performance bottlenecks, scalability risks, and maintainability issues. Then Provide: A clear architecture breakdown, Critical problem areas, refactoring strategies, Improved production-grade code. Preserve all existing functionality. Only improve code quality, performance, scalability, and maintainability.\"",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "3. Debugging Expert: \"Act as a senior debugging engineer investigating a critical production issue. Analyze the code, trace the root cause, explain the failure, and identify hidden edge cases. Provide: Functionality breakdown, root cause, edge cases, Production-ready fix. Do Not Guess. Verify assumptions and fix underlying cause without changing exisiting functionality.\"",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "4.Perfomance Engineer: \"Act as a senior performance engineer optimizing a production app for massive scale. Identify bottlenecks, inefficient logic, unnecessary rendering, expensive operations, and memory leaks. Provide: Performance issues, Optimization strategy, Production-Ready optimized code, Scalability improvements. Prioritize speed, memory efficiency. rendering performance, and scalability without changing functionality.\"",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "5.Softward Engineer: \"Act as a senior software architect refactoring a production codebase for scale. Improve separation of concerns, modularity, coupling, scalability, and maintainability without changing functionality. Provide: New Folder structure, Architecture breakdown, Production-Ready refactored code, Key improvements. Apply clean architecture principles and preserve existing functionality.\"",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "6.Backend Expert Engineer: \"Act like senior systems architect designing infrastructure for a high-grown startup. First, design a scalable, production-grade system architecture. Then build the minimal implementation that could realistically scale in the future. Include: System architecture, component structure, Data Flow, API design, Database Schema, Caching strategy, Production-Ready implementation code. Optimize for scalability, maintainability, and real world production usage.\"",
+      "category": "public discovery",
+      "status": "unverified",
+      "needed": "Public pages, discovery files and deployed response evidence; one-page source checks are partial."
+    },
+    {
+      "requested": "7. Agent Team engineer: :Act as 4 senior AI Agents working on one project. Architecture-Design scalable Architecture. Engineer-Build the implementation. Reviewer-Review and Identify weaknesses. Optimizer-Improve performance and scalability. Work sequentially, with each agent improving the previous work. Provide. Complete architecture, Full implementation, Review findings, Final production ready version. Build it like a real engineer team preparing a startup product for scale.\"",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "8.Frontend Expert Engineer: \"Act as a senior frontend engineer building a production-grade UI system. Create reusable, scalable, accessible components with clean API'S and developer experience. Handle loading, empty and edge states, responsive design, accessibility, and reusability. Provide. Component architecture, Props/API Design, Production-ready code, usage examples, Best Practices. Build for a real product at scale.\"",
+      "category": "accessibility and performance",
+      "status": "unverified",
+      "needed": "Keyboard/screen-reader/device checks and real-user performance measurements."
+    },
+    {
+      "requested": "9.AI  Technical Lead Engineer: \"Act as a senior technical lead engineer responsible for this product long term. Before coding, clarify requirements, challenge weak decisions, identify scaling risk, suggest better approaches, and prioritize simplicity. Then Provide: Key Technical decisions, Tradeoffs, Recommend architecture ,implementation plan, production-ready solution. Think like a tech lead maintaining and scaling this product for 5+ years, not just generation code.\"",
+      "category": "planning",
+      "status": "unverified",
+      "needed": "Application source and current behavior to document requirements, schema and release gates."
+    },
+    {
+      "requested": "10.Security Audit Engineer: \"Act as a senior security engineer auditing a production application. Inspect for vulnerabilities, authentication, flaws, API weaknesses, injection risk, sensitive data exposure, and infrastructure risk. Provide. Vulnerability report with severity, realistic attack scenarios, Secure implementation fixes, Production-grade recommendations. Prioritize exploitable risks and robust fixes without breaking existing functionality.\"",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "11. DevOps: \"Act as senior DevOps engineer preparing and application for production. Design scalable deployment infrastructure, CI/CD ,monitoring, logging, reliability, and downtime prevention. Provide. Infrastructure architecture, Deployment workflow, CI/CD pipeline, Docker/Kubernetes setup, Monitoring strategy, Production checklist. Optimize for reliability, scalability, security and simple operations.\"",
+      "category": "policies",
+      "status": "unverified",
+      "needed": "Actual seller/data practices and reviewed policy text; public HTML cannot establish enforceability."
+    },
+    {
+      "requested": "Remove these signs that content is A.I.  generated.",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "1.Buttons waiting for a server",
+      "category": "source and deployment",
+      "status": "unverified",
+      "needed": "Source, hosting/database/auth/DNS access and negative tests; these settings cannot be certified from a homepage."
+    },
+    {
+      "requested": "2.No loading skeletons",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "3.Screen opens empty",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "4.missing tab animations",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    },
+    {
+      "requested": "6.Missing Offline Support",
+      "category": "scope",
+      "status": "unverified",
+      "needed": "Keep the original request; additional work needs implementation and verification."
+    }
+  ]
+}

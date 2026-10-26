@@ -27,3 +27,6 @@ Coding/
 Strident_Idle_Result.json
 Strident_File_Inventory_*.json
 Strident_File_Inventory_*.md
+
+.live-test/
+*.sqlite3*

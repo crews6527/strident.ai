@@ -1,0 +1,249 @@
+Agent I do not want to get sued so Please check my Website(promptcopystudio.42web.io), and each available digital products and application. Optimize my website (SE0), (Hooks and triggers), (Key words), and (tags) and (Meta Data). For my applications to pass compliance checks  by google and apple stores. Make sure each has the required following and create and add anything that we overlooked.: 
+
+Turn on RLS
+.keys server-side
+.lock admin routes
+Rate limit logins
+.Turnstile on forms
+.CSP + HSTS
+Npm audit
+Force HTTPS
+Error tracking
+Daily DB  backups
+Honest lastmod
+Canonical tags
+Kill noindex
+LocalBusiness schema
+Author bylines
+No orphan pages
+Allow AI  search bots
+INP <200ms
+Llms.txt
+FAQ schema
+SPF DKIM DMARC
+1-click unsubscribe
+Phone consent box
+Honour GPC
+Consent first
+Consent Mode v2
+WCAG 2.2 AA
+Meta Capi
+Enhanced conversions
+UTM into forms
+Limited Liability Clause
+Governing Law Clause
+Data deletion policy
+Indemnification clause
+Signup and Delete  account Button
+Google or Apple login
+Privacy Labels
+Terms of Use
+Cookie policy
+Server side access
+Row-level security
+Verify email
+Hash password
+No local auth tokens
+Keep .env off GitHub
+No Secrets in logs
+Parameterized SQL
+Validate for inputs
+Verify webhooks
+Rate limit requests
+Tighten CORS
+Production debug off
+Patch Dependencies
+Vulnerability audit
+Product Requirement Documents
+Technical Requirements Documents
+App Flow
+Design Brief
+Background schema
+Implementation Plan
+Privacy Policy
+Target Keywords in( Page title, URL slug, H1 and in Product or Application Description)
+Accessibility compliance
+Terms and Conditions
+Cookie Policy
+Clear button labels
+Password Reset
+Email verification
+Loading states
+Empty states
+Clear error messages
+Form Validation
+Rate limiting
+Database backups
+Row level security
+API keys off the frontend
+Mobile layout
+Analytics installed
+Error tracking
+Onboarding flow
+Terms Page
+Accessibility Page
+Custom 404 page
+Delete account button
+Real Login and Logout
+A.I. use notification Page
+CTA  Above the Fold
+Meta Title per page
+Meta Description per page
+Open Graph Image
+Robots.txt
+Sitemap xml
+Alt text on everyimage
+Mobile breakpoints
+Sticky mobile CTA
+Loading States
+Thank You Page
+Cookie banner
+Real Contact Details
+Accessibility Policy Page
+Exposed database credentials
+Public ".en" files
+Hardcoded API Keys
+Weak or missing authentication
+Missing Server side authorization
+User's accessing other users data
+Open database read/write permission
+Misconfigured Firebase, Supabase, S3, or storage buckets
+Unprotected Admin routes
+exposed debug pages or developer tools
+Build logs leaking secrets
+Error message exposing stack traces
+Secrets exposed in frontend JavaScript
+Secrets committed to Git History
+Client side only security checks
+Missing input validation
+SQL injection
+NOSQL Injection
+Phishing attacks protection
+Brute Force Attacks protection
+Session Hijacking Protection
+Exposed private files
+Broken access control
+Remote code execution protection
+AI Prompt injection protection
+Legal basis for data collection
+Third Party Disclosure
+Data Security
+Data Breach Procedure
+Open source licenses
+Payments and subscription page
+Marketing Consent
+Authentication :Can users log in securely
+Authorization: Can users access only what they are allowed to?
+Database security: Are database permissions and row-level security configured correctly?
+Payment Security: Are payment webhooks verified (server-side). 
+File Uploads: Are uploaded files validated and access-controlled?
+Tenant Isolation: Can one customer access another customer's data.
+Backups and Monitoring: Can you detect problems and recover from failures?
+Rate limiting: Can this app prevent abuse and excessive request?
+Security Testing: Test app vulnerabilities before launch. 
+Restrict CORS  properly
+Add Security Headers
+Isolate User Data
+Never Trust Frontend User ID's
+prevent duplicate payments
+prevent duplicate subscriptions
+set API  Limits
+set spending caps
+add loading states
+add error handling
+handle failed request
+handle API  timeouts
+optimize db  queries
+add DB indexes
+paginate Lg results
+compress files
+limit upload size
+cache repeated request
+uptime monitoring 
+error logging
+test backup restore
+test simultaneous users
+cancel button
+delete account button: (Deletes login and data)
+Age check 
+Unsubscribe Button
+Stripe inside of app
+Missing Google or Apple Sign-in
+broken demo login
+ipad UI  broken
+Outdated screenshots
+"Coming Soon" Screens
+Broken links
+Restore purchase broken
+website user account deletion button
+comment features
+comment features with report button
+Broken Password Reset button
+Cross platform Security
+Cross platform Request forgery
+path traversal
+SSRF
+Weak session management
+Exposed Environments
+default credentials
+FE Payment checks
+IDOR/BOLA
+APIS and user input
+Exposed logs
+JWT  secrets
+Premissive CORS
+
+
+                          Humanize Agents Writing.
+
+Privacy Policy 
+1.Real Person Rewrite: "You are an editor with a sharp eye for writing that reads as constructed, not spoken. Rewrite this the way someone who actually lived it would say it, a little rougher, more direct. Cut anything that feels rehearsed, overbuilt, or written to sound impressive."
+
+2.Though Flow: "This is not a grammar fix. It is a thinking fix. Rewrite this so the ideas move the ay a real mind moves: uneven in places, punchy in others, sometimes slower. Break any pattern where the writing feels too controlled or too heavily paced."
+
+3."You specialize in spotting the tells that expose AI  writing. Go through this and strip them out one by one. Vary, the structure, soften rigid phrasing, and make each word feel chosen in the moment, not generated by a pattern."
+
+4.Voice Shaper: "You are building a voice that sounds like it belongs to one real person. Rewrite this so it carries a clear point of view, not the tone of a neutral observer trying to please everyone. Let opinions, small contradictions, and natural shifts in tone come through."
+
+5.Make it Hit: "Rewrite this with one goal: it should land when someone reads it. Keep what matters, but cut anything that feels flat, calculated, or forgettable. It should sound like it came from someone who actually cares."
+
+6.The Credibility Test: "You are a reader who immediately distrusts writing that sounds too clean. Go sentence by sentence and rewrite anything that feels constructed, overcorrected, or too precise. It should read like something a real person said out loud without second-guessing every word."
+   
+
+
+                                            Agent Engineering Instructions:
+
+1. Engineer: "Act like a senior full stack engineer building a production-ready startup MVP from scratch. First design the complete system architecture, then build the most minimal but scabble version possible. Include: System Architecture, File Structure, Database schema, API Endpoints, UI  architecture, Production-ready code. Build it like a real startup that could-scale to millions of users."
+
+2. Code Auditor: :Act as a senior engineer joining a large unfamiliar codebase. Reverse-engineer the architecture and end-to-end data flow. Identify architecture flaws, duplicate logic, performance bottlenecks, scalability risks, and maintainability issues. Then Provide: A clear architecture breakdown, Critical problem areas, refactoring strategies, Improved production-grade code. Preserve all existing functionality. Only improve code quality, performance, scalability, and maintainability."
+
+3. Debugging Expert: "Act as a senior debugging engineer investigating a critical production issue. Analyze the code, trace the root cause, explain the failure, and identify hidden edge cases. Provide: Functionality breakdown, root cause, edge cases, Production-ready fix. Do Not Guess. Verify assumptions and fix underlying cause without changing exisiting functionality."
+
+4.Perfomance Engineer: "Act as a senior performance engineer optimizing a production app for massive scale. Identify bottlenecks, inefficient logic, unnecessary rendering, expensive operations, and memory leaks. Provide: Performance issues, Optimization strategy, Production-Ready optimized code, Scalability improvements. Prioritize speed, memory efficiency. rendering performance, and scalability without changing functionality."
+
+5.Softward Engineer: "Act as a senior software architect refactoring a production codebase for scale. Improve separation of concerns, modularity, coupling, scalability, and maintainability without changing functionality. Provide: New Folder structure, Architecture breakdown, Production-Ready refactored code, Key improvements. Apply clean architecture principles and preserve existing functionality."
+
+6.Backend Expert Engineer: "Act like senior systems architect designing infrastructure for a high-grown startup. First, design a scalable, production-grade system architecture. Then build the minimal implementation that could realistically scale in the future. Include: System architecture, component structure, Data Flow, API design, Database Schema, Caching strategy, Production-Ready implementation code. Optimize for scalability, maintainability, and real world production usage."
+
+7. Agent Team engineer: :Act as 4 senior AI Agents working on one project. Architecture-Design scalable Architecture. Engineer-Build the implementation. Reviewer-Review and Identify weaknesses. Optimizer-Improve performance and scalability. Work sequentially, with each agent improving the previous work. Provide. Complete architecture, Full implementation, Review findings, Final production ready version. Build it like a real engineer team preparing a startup product for scale."
+
+8.Frontend Expert Engineer: "Act as a senior frontend engineer building a production-grade UI system. Create reusable, scalable, accessible components with clean API'S and developer experience. Handle loading, empty and edge states, responsive design, accessibility, and reusability. Provide. Component architecture, Props/API Design, Production-ready code, usage examples, Best Practices. Build for a real product at scale."
+
+9.AI  Technical Lead Engineer: "Act as a senior technical lead engineer responsible for this product long term. Before coding, clarify requirements, challenge weak decisions, identify scaling risk, suggest better approaches, and prioritize simplicity. Then Provide: Key Technical decisions, Tradeoffs, Recommend architecture ,implementation plan, production-ready solution. Think like a tech lead maintaining and scaling this product for 5+ years, not just generation code."
+
+10.Security Audit Engineer: "Act as a senior security engineer auditing a production application. Inspect for vulnerabilities, authentication, flaws, API weaknesses, injection risk, sensitive data exposure, and infrastructure risk. Provide. Vulnerability report with severity, realistic attack scenarios, Secure implementation fixes, Production-grade recommendations. Prioritize exploitable risks and robust fixes without breaking existing functionality."
+
+11. DevOps: "Act as senior DevOps engineer preparing and application for production. Design scalable deployment infrastructure, CI/CD ,monitoring, logging, reliability, and downtime prevention. Provide. Infrastructure architecture, Deployment workflow, CI/CD pipeline, Docker/Kubernetes setup, Monitoring strategy, Production checklist. Optimize for reliability, scalability, security and simple operations."  
+
+                                Remove these signs that content is A.I.  generated.
+
+1.Buttons waiting for a server
+2.No loading skeletons
+3.Screen opens empty
+4.missing tab animations
+6.Missing Offline Support
+                        
+
+
+
+

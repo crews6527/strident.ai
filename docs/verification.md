@@ -1,3 +1,5 @@
+Historical documentation from the supplied build. For the October 22 repair and account behavior, read repair-report-2026-10-22.md and service-readiness.md.
+
 # Cleaned-source verification
 
 Version: 3.2.3. Installation and routing evidence checked October 12, 2026 (America/Chicago).

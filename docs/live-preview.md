@@ -1,3 +1,5 @@
+Historical documentation from the supplied build. For the October 22 repair and account behavior, read repair-report-2026-10-22.md and service-readiness.md.
+
 # Desktop, browser and phone access
 
 Launch the updated desktop application and click **Live preview / phone**. The browser opens a local console authenticated with a random access key. Both interfaces use the existing Controller and its tools, history and task queue. The preview starts only when opened; startup does not call Ollama.
