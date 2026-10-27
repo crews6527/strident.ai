@@ -10,6 +10,7 @@ DEFAULTS = {
     "ollama_url": "http://127.0.0.1:11434",
     "model": "",
     "text_model": "",
+    "image_url": "http://127.0.0.1:7860",
     "num_ctx": 4096,
     "num_thread": 2,
     "num_predict": 512,
@@ -46,6 +47,8 @@ def validate(data: dict) -> dict:
     if url.username or url.password or url.query or url.fragment or url.path not in {"", "/"}:
         raise ValueError("Use an Ollama server address without a path or credentials.")
     _ = url.port  # validates malformed ports
+    from .images import local_url
+    local_url(result["image_url"])
     for key, low, high in (("num_ctx", 1024, 32768), ("num_thread", 1, 32),
                           ("num_predict", 64, 4096), ("request_timeout", 2, 120), ("model_timeout", 2, 120),
                           ("task_timeout", 5, 300), ("max_task_seconds", 5, 3600),

@@ -1,4 +1,4 @@
-STRIDENT.AI 3.3.1 REPAIRED PRIVATE TEST BUILD
+STRIDENT.AI 3.3.2 REPAIRED PRIVATE TEST BUILD
 
 1. Extract the ZIP completely into a new folder.
 2. Run Install-Strident.cmd (Python 3.12 is required).
@@ -20,12 +20,18 @@ Apply-Strident-Update.cmd. Select the OLD installation folder. The updater
 backs up source and verifies the replacement. Create the personal administrator
 with Setup-Admin.cmd, then use Live-Preview.cmd or the desktop preview button.
 Recreate the shortcut with Create-Desktop-Shortcut.cmd if it still opens an old
-copy. The running window must identify version 3.3.1 and the expected folder.
+copy. The running window must identify version 3.3.2 and the expected folder.
 
-Verification: 195 automated tests passed, browser account/task flows passed,
-idle check passed, and pinned dependency audit found no known vulnerabilities.
+The earlier 3.3.1 package recorded 195 automated tests and browser account flows.
+For this capability update, see docs/capability-verification.txt for current checks.
+The earlier dependency audit is historical, not a fresh vulnerability scan.
 Your Windows shortcut, installed Ollama model generation, Tailscale phone path
 and public deployment were not verified from this environment.
 
 Read docs/repair-report-2026-10-22.md and docs/service-readiness.md.
 This is a personal/private testing release, not an approved public service.
+
+NEW GENERATIVE WORKFLOWS
+Use /create for a draft and /team for four separate model stages.
+Use /capabilities to see limits, and docs/generative-capabilities.md for local
+image setup. Image generation requires a separate local service.

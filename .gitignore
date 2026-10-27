@@ -30,3 +30,5 @@ Strident_File_Inventory_*.md
 
 .live-test/
 *.sqlite3*
+
+Generated/

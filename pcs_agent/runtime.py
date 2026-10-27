@@ -47,6 +47,21 @@ def model_result(result, limit):
 
 
 def _execute(command, config, attachment, history, emit, metrics):
+    from .generative import CAPABILITIES, create_task
+    if command.strip().casefold() in {'/capabilities', 'show capabilities'}:
+        metrics['route'] = 'capability report'
+        return {'status': 'complete', 'summary': 'Capabilities and dependencies', 'reply': CAPABILITIES, 'evidence': []}
+    creative = re.fullmatch(r'/(create|team)(?:\s+(.*))?', command.strip(), re.I | re.S)
+    team_role = re.fullmatch(r'/role\s+team(?:\s+(.*))?', command.strip(), re.I | re.S)
+    if creative or team_role:
+        mode, request = creative.groups() if creative else ('team', team_role.group(1) or '')
+        reference = ''
+        if attachment and not config.get('_member_mode'):
+            reference = ToolRunner(config, attachment).read_file(attachment)['text']
+        return create_task(request or '', config, history, emit, metrics, team=mode.casefold() == 'team', reference=reference)
+    if re.match(r'^/image(?:\s|$|-status$)', command.strip(), re.I):
+        from .images import image_task
+        return image_task(command, config, emit, metrics)
     if config.get('_member_mode'):
         return member_execute(command, config, history, emit)
     role, remaining = detect_role(command) if re.match(r"^(?:/role\s|act as\s|switch to\s)", command.strip(), re.I) else (None, command)

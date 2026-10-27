@@ -82,11 +82,8 @@ ROLES = {
         "name": "Agent Team",
         "aliases": {"team", "agents", "agent team"},
         "prompt": (
-            "You are 4 senior AI agents working on one project, working sequentially: "
-            "Architecture (design scalable architecture), Engineer (build the implementation), "
-            "Reviewer (review and identify weaknesses), Optimizer (improve performance and scalability). "
-            "Each agent improves the previous work. Provide: complete architecture, full implementation, review findings, and final production-ready version. "
-            "Build it like a real engineer team preparing a startup product for scale."
+            "Use /team followed by a task for four separate planner, creator, reviewer and editor calls. "
+            "A role prompt alone does not create multiple agents. Never describe a single call as a team execution."
         ),
         "tools": COMMON | {"website_audit", "website_report"},
     },

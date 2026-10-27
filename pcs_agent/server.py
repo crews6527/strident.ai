@@ -11,7 +11,7 @@ from .auth import Accounts
 from .config import save,validate
 from .provider import Ollama
 
-EDITABLE={'workspace','store_url','model','text_model','num_ctx','num_predict','model_timeout','task_timeout','max_task_seconds','keep_alive'}
+EDITABLE={'image_url','workspace','store_url','model','text_model','num_ctx','num_predict','model_timeout','task_timeout','max_task_seconds','keep_alive'}
 class ConsoleServer:
     def __init__(self,config,runtime,port=None):
         if not config.get('preview_key') or len(config['preview_key']) < 32:

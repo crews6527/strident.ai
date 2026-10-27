@@ -1,3 +1,9 @@
+## Generative workflows (3.3.2)
+
+Use `/create` for drafts, `/team` for separate planner/creator/reviewer/editor calls,
+and `/capabilities` for current limits. Administrator `/image` connects to a separately
+installed local image API. See [setup and verification limits](docs/generative-capabilities.md).
+
 # October 22 repair and account update
 
 Read docs/service-readiness.md for this release. Start the isolated environment with Live-Test.cmd after Install-Strident.cmd. Create the first administrator on the setup form. No default password is provided. Administrator-created users have isolated writing workspaces and working login/logout.

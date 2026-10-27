@@ -1,0 +1,16 @@
+Strident.AI 3.3.2 capability update | 2026-10-26
+
+Environment: Linux, CPython 3.12.14, pinned requirements.txt.
+Full verify_app.py run: 211 tests passed in 48.695 seconds.
+Includes 16 new tests for generative workflows and the local image API adapter.
+Agent tests use a controlled mock model, not real Ollama generation.
+Image API tests use a local HTTP fixture and a fixture PNG, not a diffusion model.
+Idle check: 5-second sample passed; zero attempted Ollama/inference requests.
+Package integrity and pinned dependencies: passed.
+Existing automated HTTP account and authorization tests are included.
+
+Not verified here: Windows desktop/shortcuts, real Ollama generation, real image
+service installation/generation, image quality, hardware capacity or performance,
+public deployment, live browser rendering of the new settings field, or model
+accuracy on research/analytics/compliance tasks. No fresh vulnerability scan.
+The earlier local Ollama installation errors remain external blockers.
