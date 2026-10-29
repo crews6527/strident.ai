@@ -64,6 +64,8 @@ def validate(data: dict) -> dict:
     for name in ("model", "text_model"):
         if not isinstance(result[name], str) or len(result[name]) > 150:
             raise ValueError("Invalid model name.")
+        if " · " in result[name]:
+            raise ValueError("Select the exact installed model name without a file-size label (for example qwen3.5:2b).")
     if not isinstance(result["apps"], dict):
         raise ValueError("apps must map names to absolute executable paths.")
     for name, path in result["apps"].items():

@@ -1,6 +1,7 @@
 from __future__ import annotations
 from contextlib import contextmanager
 import json
+import http.client
 import socket
 import time
 import urllib.error
@@ -12,6 +13,10 @@ def nonthinking_value(metadata):
     if isinstance(control, dict) and isinstance(control.get("values"), list):
         if any(value is False for value in control["values"]):
             return False
+    # Older servers report only capabilities, without a values descriptor.
+    # An explicit descriptor takes precedence, including level-only controls.
+    if "thinking" not in metadata and "thinking" in metadata.get("capabilities", []):
+        return False
     return None
 
 
@@ -30,6 +35,12 @@ class Ollama:
             except (OSError, TimeoutError):
                 detail = "The error response could not be read."
             raise RuntimeError(f"Ollama {path} returned HTTP {exc.code}: {detail}") from exc
+        except (http.client.RemoteDisconnected, ConnectionResetError, ConnectionAbortedError) as exc:
+            raise RuntimeError(
+                f"Ollama {path} closed the connection before completing a response while {phase}. "
+                "Check the ollama serve window for model-runner errors. "
+                "This is a disconnected request, not a confirmed response timeout."
+            ) from exc
         except urllib.error.URLError as exc:
             if isinstance(exc.reason, (TimeoutError, socket.timeout)):
                 raise RuntimeError(f"Ollama {path} timed out after {seconds:g}s while {phase}. Run Test-Ollama.cmd to check the selected model directly.") from exc
@@ -70,6 +81,9 @@ class Ollama:
             payload["tools"] = tools
         if think is not None:
             payload["think"] = think
+        emit({"kind": "log", "stage": True,
+              "text": f"Ollama request settings: thinking={think if think is not None else 'model default'}; "
+                      f"output limit={self.config['num_predict']}; context={self.config['num_ctx']}; streaming=True."})
         message = {"role": "assistant", "content": ""}
         calls = []
         done = False

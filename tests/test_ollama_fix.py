@@ -153,6 +153,22 @@ class OllamaFixTests(unittest.TestCase):
         for metadata in ({}, {"thinking": {"values": ["low", "high"]}}, {"thinking": {"values": [0, True]}}):
             self.assertIsNone(nonthinking_value(metadata))
 
+    def test_capability_only_thinking_and_explicit_controls(self):
+        self.assertIs(nonthinking_value({"capabilities": ["completion", "thinking"]}), False)
+        self.assertIsNone(nonthinking_value({"capabilities": ["thinking"], "thinking": {"values": ["low", "high"]}}))
+
+    def test_model_display_labels_are_rejected_before_request(self):
+        with self.assertRaisesRegex(ValueError, "file-size label"):
+            validate({"model": "qwen3.5:2b · 2.56 GB"})
+
+    def test_disconnect_has_actionable_error(self):
+        import http.client
+        client = Ollama(validate({"model": "qwen3.5:2b"}))
+        with patch("pcs_agent.provider.urllib.request.build_opener") as build:
+            build.return_value.open.side_effect = http.client.RemoteDisconnected("closed")
+            with self.assertRaisesRegex(RuntimeError, "not a confirmed response timeout"):
+                client.chat([], [], lambda event: None)
+
     def test_runtime_passes_supported_thinking_control_and_stage(self):
         fake = Mock()
         fake.inspect.return_value = {"models": [{"name": "qwen3.5:2b"}]}
