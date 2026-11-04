@@ -1,8 +1,12 @@
-STRIDENT.AI 3.3.2 REPAIRED PRIVATE TEST BUILD
+STRIDENT.AI 3.3.4 REPAIRED PRIVATE TEST BUILD
 
-1. Extract the ZIP completely into a new folder.
+1. Extract the ZIP completely into a new folder. Keep the old copy as a backup.
 2. Run Install-Strident.cmd (Python 3.12 is required).
-3. Run Live-Test.cmd to open an isolated test installation.
+3. Run Launch-Strident.cmd. The desktop window must show build 3.3.4.
+   Enter Help, then open Settings, refresh models, select the exact installed
+   task/writing model and save. With Ollama running, enter /testmodel.
+   A completed reply is required to verify generation on this computer.
+   Then run Live-Test.cmd to open an isolated browser test installation.
 4. Expand First administrator setup in the browser. The launch window shows
    the setup key; the browser opened by the launcher fills it for you.
 5. Choose your administrator username and a password of 15+ characters.
@@ -20,7 +24,7 @@ Apply-Strident-Update.cmd. Select the OLD installation folder. The updater
 backs up source and verifies the replacement. Create the personal administrator
 with Setup-Admin.cmd, then use Live-Preview.cmd or the desktop preview button.
 Recreate the shortcut with Create-Desktop-Shortcut.cmd if it still opens an old
-copy. The running window must identify version 3.3.2 and the expected folder.
+copy. The running window must identify version 3.3.4 and the expected folder.
 
 The earlier 3.3.1 package recorded 195 automated tests and browser account flows.
 For this capability update, see docs/capability-verification.txt for current checks.
@@ -28,7 +32,8 @@ The earlier dependency audit is historical, not a fresh vulnerability scan.
 Your Windows shortcut, installed Ollama model generation, Tailscale phone path
 and public deployment were not verified from this environment.
 
-Read docs/repair-report-2026-10-22.md and docs/service-readiness.md.
+Read docs/repair-3.3.4.md for this repair and live acceptance checks.
+Read docs/service-readiness.md for public service limitations.
 This is a personal/private testing release, not an approved public service.
 
 NEW GENERATIVE WORKFLOWS

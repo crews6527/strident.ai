@@ -95,7 +95,7 @@ def load(path: Path | None = None) -> dict:
     path = path or config_path()
     if not path.exists():
         return validate({})
-    data = validate(json.loads(path.read_text(encoding="utf-8")))
+    data = validate(json.loads(path.read_text(encoding="utf-8-sig")))
     if data["assistant_name"] == "Studio":
         data["assistant_name"] = "Strident"
         save(data, path)

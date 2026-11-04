@@ -11,7 +11,7 @@ def main():
     QApplication.setHighDpiScaleFactorRoundingPolicy(
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     app = QApplication(sys.argv)
-    app.setAttribute(Qt.ApplicationAttribute.AA_UseHighDpiPixmaps)
+    # Qt 6 enables high-DPI pixmaps automatically; the Qt 5 attribute was removed.
     app.setApplicationName("Strident.AI")
     app.setStyle("Fusion")
     try:

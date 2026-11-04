@@ -86,8 +86,10 @@ def main():
         path = config_path()
         if path.exists() and path.stat().st_size > 128000:
             raise ValueError("Settings file is too large to read.")
-        values = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+        values = json.loads(path.read_text(encoding="utf-8-sig")) if path.exists() else {}
         config = validate(values)
+        # Match Settings' writing-model probe and the console /testmodel command.
+        config["model"] = config.get("text_model") or config["model"]
         if not config["model"]:
             raise ValueError("Choose and save an installed model in Strident Settings first.")
         print("Address: " + config["ollama_url"])

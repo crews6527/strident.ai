@@ -11,6 +11,14 @@ from inspect_directory import inventory, report
 
 
 class ConfigTests(unittest.TestCase):
+    def test_windows_utf8_bom_settings_load_without_rewriting(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'config.json'
+            path.write_text(json.dumps({'model': 'exact:2b'}), encoding='utf-8-sig')
+            original = path.read_bytes()
+            self.assertEqual(load(path)['model'], 'exact:2b')
+            self.assertEqual(path.read_bytes(), original)
+
     def test_roundtrip_single_file(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "config.json"
