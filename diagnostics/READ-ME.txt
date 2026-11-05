@@ -1,0 +1,15 @@
+Strident startup check
+
+Extract this ZIP into a new folder, then double-click Run-Startup-Check.cmd.
+The diagnostic checks the installation used in the supplied error log:
+Downloads\strident.ai-strident.ai\strident.ai-strident.ai
+If that folder is absent, it asks for the folder containing Launch-Strident.cmd.
+
+Send Strident-Startup-Result.txt from this diagnostic folder.
+The window stays open after the check. If no report was saved, send a screenshot.
+
+This checks the real saved settings and instance lock without opening a Qt dialog.
+It does not reinstall software, reset settings, delete lock files, stop processes,
+contact Ollama, or display your configuration contents. The app's existing load
+function may perform its normal legacy settings migration, just as startup does.
+A successful check means those startup checks passed; it is not a model or GUI test.
