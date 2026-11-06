@@ -70,7 +70,8 @@ assert outcome['rendered'] and outcome['thread_stopped'] and outcome['children']
             result = subprocess.run(
                 [sys.executable, '-c', code, 'complete' if config else 'failed'],
                 cwd=Path(__file__).resolve().parent.parent,
-                env={**os.environ, 'LOCALAPPDATA': folder, 'QT_QPA_PLATFORM': 'offscreen'},
+                env={**os.environ, 'LOCALAPPDATA': folder,
+                     'QT_QPA_PLATFORM': os.environ.get('STRIDENT_TEST_QT_PLATFORM', 'offscreen')},
                 text=True, capture_output=True, timeout=30)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 

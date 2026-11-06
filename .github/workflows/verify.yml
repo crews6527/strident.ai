@@ -29,6 +29,18 @@ jobs:
       - run: python verify_app.py
       - run: python verify_idle.py --seconds 5 --output idle-result.json
       - run: python -I guard_strident.py --check
+      - name: Exercise Mac installer and native desktop window
+        if: runner.os == 'macOS'
+        env:
+          STRIDENT_TEST_QT_PLATFORM: cocoa
+        run: |
+          bash Install-Strident.command
+          .venv/bin/python -m unittest discover -s tests -p test_entrypoint.py -v
+      - name: Exercise native Windows desktop window
+        if: runner.os == 'Windows'
+        env:
+          STRIDENT_TEST_QT_PLATFORM: windows
+        run: python -m unittest discover -s tests -p test_entrypoint.py -v
       - name: Parse Windows recovery script
         if: runner.os == 'Windows'
         shell: pwsh
