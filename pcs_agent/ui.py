@@ -668,8 +668,13 @@ class ConsoleWindow(QMainWindow):
             else:
                 text += "\nConsole process metrics unavailable"
             self.health.setText(text)
-        except (psutil.Error, OSError):
-            self.health.setText("Resource metrics unavailable on this system.")
+        except Exception:
+            # Resource statistics are optional. A platform-specific psutil error
+            # must not abort Qt or repeatedly interrupt the user's agent tasks.
+            import traceback
+            traceback.print_exc()
+            self.timer.stop()
+            self.health.setText("Resource metrics unavailable on this system. Monitoring stopped; agent tasks remain available.")
 
     def refresh_files(self):
         self.file_list.clear()

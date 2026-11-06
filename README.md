@@ -1,3 +1,7 @@
+# Desktop startup update (3.3.5)
+
+See [Windows and Mac launch instructions and live acceptance checks](docs/desktop-recovery.md). This update prevents unhandled Python callbacks from aborting Qt and adds Mac launchers. Real model generation on your computer still requires live verification.
+
 ## Generative workflows (3.3.2)
 
 Use `/create` for drafts, `/team` for separate planner/creator/reviewer/editor calls,

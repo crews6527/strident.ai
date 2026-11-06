@@ -30,7 +30,38 @@ def main():
     try:
         window = ConsoleWindow(config)
         window.show()
-        return app.exec()
+        # Exceptions in Qt callbacks do not propagate out of app.exec(). Without
+        # a Python hook PyQt calls abort(), bypassing our outer try/finally.
+        previous_hook = sys.excepthook
+        notices = []
+        def callback_error(kind, error, tb):
+            traceback.print_exception(kind, error, tb, file=sys.stderr)
+            sys.stderr.flush()
+            try:
+                if window.controller:
+                    window.controller.cancel_all()
+                if notices:
+                    return
+                notice = QMessageBox(window)
+                notice.setIcon(QMessageBox.Icon.Critical)
+                notice.setWindowTitle("Strident encountered an error")
+                notice.setText("An interface action failed. Active and queued tasks were cancelled. "
+                               "The window remains open; review the error before retrying.")
+                notice.setInformativeText(f"{kind.__name__}: {error}")
+                notice.setStandardButtons(QMessageBox.StandardButton.Ok)
+                notices.append(notice)
+                notice.finished.connect(lambda _: notices.clear())
+                notice.open()
+            except Exception:
+                # Reporting must never raise back into PyQt's fatal handler.
+                traceback.print_exc(file=sys.stderr)
+                sys.stderr.flush()
+                app.exit(1)
+        sys.excepthook = callback_error
+        try:
+            return app.exec()
+        finally:
+            sys.excepthook = previous_hook
     except Exception as exc:
         print("Startup failed while opening the desktop window:", file=sys.stderr, flush=True)
         traceback.print_exc()
